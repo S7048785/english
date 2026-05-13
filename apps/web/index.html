@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <!-- 关键：在页面渲染前设置主题 -->
+	  <script>
+		  (function() {
+			  try {
+				  // 1. 优先读取用户手动设置的主题
+				  const stored = localStorage.getItem('app-theme');
+				  // 2. 其次检测系统是否使用了深色模式
+				  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+				  // 确定最终主题
+				  let theme = stored;
+				  if (!theme) {
+					  theme = prefersDark ? 'dark' : 'light';
+				  }
+
+				  // 立即修改根节点的属性
+				  if (theme === 'dark') {
+					  document.documentElement.setAttribute('data-theme', 'dark');
+					  // 可选：防止白屏出现，直接内联一个深色背景
+					  // document.documentElement.style.backgroundColor = '#121212';
+				  } else {
+					  document.documentElement.setAttribute('data-theme', 'light');
+					  // document.documentElement.style.backgroundColor = '#ffffff';
+				  }
+			  } catch (e) {}
+		  })();
+	  </script>
+    <title>Vite App</title>
+
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

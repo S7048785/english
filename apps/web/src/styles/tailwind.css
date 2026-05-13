@@ -1,0 +1,73 @@
+@import "tailwindcss/theme" layer(tailwind-theme);
+@import "tailwindcss/preflight" layer(tailwind-reset);
+@import "tailwindcss/utilities" layer(tailwind-utilities);
+@import "@/assets/main.css";
+
+/* dark/light mode — Vuetify uses .v-theme--dark/.v-theme--light instead of .dark */
+@custom-variant light (&:where(.v-theme--light, .v-theme--light *));
+@custom-variant dark (&:where(.v-theme--dark, .v-theme--dark *));
+/* @custom-variant dark (.v-theme--dark &);
+@custom-variant light (.v-theme--light &); */
+
+/* 2. 导入你的自定义变量文件 */
+
+@theme {
+  --breakpoint-*: initial;
+  /* reset Tailwind defaults */
+  /* keep in sync with vuetify plugin/config and settings.scss */
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 960px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1920px;
+  --breakpoint-xxl: 2560px;
+  --color-card-background: var(--color-card-background);
+}
+
+/*
+  note: adopt and extend values from TailwindCSS
+*/
+@utility rounded-pill {
+  border-radius: 9999px
+}
+
+@utility rounded-circle {
+  border-radius: 50%
+}
+
+@utility rounded-shaped {
+  border-radius: 24px 0
+}
+
+@source inline('rounded');
+/* .25rem */
+@source inline('rounded-{none,sm,md,lg,xl,2xl,3xl,full,pill,circle,shaped}');
+
+/*
+  note: adopt elevation shadows from TailwindCSS
+*/
+@utility elevation-0 {
+  box-shadow: none
+}
+
+@utility elevation-1 {
+  box-shadow: var(--shadow-xs)
+}
+
+@utility elevation-2 {
+  box-shadow: var(--shadow-sm)
+}
+
+@utility elevation-3 {
+  box-shadow: var(--shadow-md)
+}
+
+@utility elevation-4 {
+  box-shadow: var(--shadow-xl)
+}
+
+@utility elevation-5 {
+  box-shadow: var(--shadow-2xl)
+}
+
+@source inline('elevation-{0,1,2,3,4,5}');
