@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import cookieParser from 'cookie-parser';
 import { Config } from '@en/config';
 import { InterceptorExceptionFilter } from 'libs/shared/src/interceptor/exceptionFilter';
 import { InterceptorInterceptor } from 'libs/shared/src/interceptor/interceptor';
@@ -16,6 +17,7 @@ async function bootstrap() {
       enableImplicitConversion: true, // 核心：开启隐式转换
     },
   }));
+  app.use(cookieParser());
   // 设置全局前缀为 api
   app.setGlobalPrefix('api');
   // 启用版本控制，使用 URI 版本，默认版本为 v1

@@ -1,0 +1,1 @@
+export type LoginType = 'LOGIN' | 'REGISTER'

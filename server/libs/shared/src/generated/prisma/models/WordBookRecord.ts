@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.js"
+import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model WordBookRecord
@@ -387,10 +387,6 @@ export type WordBookRecordUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.WordBookRecordUpdateWithWhereUniqueWithoutUserInput | Prisma.WordBookRecordUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.WordBookRecordUpdateManyWithWhereWithoutUserInput | Prisma.WordBookRecordUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.WordBookRecordScalarWhereInput | Prisma.WordBookRecordScalarWhereInput[]
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
 }
 
 export type WordBookRecordCreateNestedManyWithoutWordInput = {

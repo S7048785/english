@@ -27,6 +27,7 @@
       "@libs/shared": ["libs/shared/src"],
       "@libs/shared/*": ["libs/shared/src/*"]
     },
+    "types": ["node", "multer"],
     "strictPropertyInitialization": false,
   }
 }

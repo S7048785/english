@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.js"
+import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model User
@@ -42,6 +42,9 @@ export type UserMinAggregateOutputType = {
   email: string | null
   phone: string | null
   address: string | null
+  bio: string | null
+  isTimingTask: boolean | null
+  timingTaskTime: string | null
   password: string | null
   avatar: string | null
   wordNumber: number | null
@@ -57,6 +60,9 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   phone: string | null
   address: string | null
+  bio: string | null
+  isTimingTask: boolean | null
+  timingTaskTime: string | null
   password: string | null
   avatar: string | null
   wordNumber: number | null
@@ -72,6 +78,9 @@ export type UserCountAggregateOutputType = {
   email: number
   phone: number
   address: number
+  bio: number
+  isTimingTask: number
+  timingTaskTime: number
   password: number
   avatar: number
   wordNumber: number
@@ -99,6 +108,9 @@ export type UserMinAggregateInputType = {
   email?: true
   phone?: true
   address?: true
+  bio?: true
+  isTimingTask?: true
+  timingTaskTime?: true
   password?: true
   avatar?: true
   wordNumber?: true
@@ -114,6 +126,9 @@ export type UserMaxAggregateInputType = {
   email?: true
   phone?: true
   address?: true
+  bio?: true
+  isTimingTask?: true
+  timingTaskTime?: true
   password?: true
   avatar?: true
   wordNumber?: true
@@ -129,6 +144,9 @@ export type UserCountAggregateInputType = {
   email?: true
   phone?: true
   address?: true
+  bio?: true
+  isTimingTask?: true
+  timingTaskTime?: true
   password?: true
   avatar?: true
   wordNumber?: true
@@ -231,6 +249,9 @@ export type UserGroupByOutputType = {
   email: string | null
   phone: string
   address: string | null
+  bio: string | null
+  isTimingTask: boolean
+  timingTaskTime: string
   password: string
   avatar: string | null
   wordNumber: number
@@ -269,6 +290,9 @@ export type UserWhereInput = {
   email?: Prisma.StringNullableFilter<"User"> | string | null
   phone?: Prisma.StringFilter<"User"> | string
   address?: Prisma.StringNullableFilter<"User"> | string | null
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  isTimingTask?: Prisma.BoolFilter<"User"> | boolean
+  timingTaskTime?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
   wordNumber?: Prisma.IntFilter<"User"> | number
@@ -287,6 +311,9 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
+  isTimingTask?: Prisma.SortOrder
+  timingTaskTime?: Prisma.SortOrder
   password?: Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   wordNumber?: Prisma.SortOrder
@@ -308,6 +335,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
   address?: Prisma.StringNullableFilter<"User"> | string | null
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
+  isTimingTask?: Prisma.BoolFilter<"User"> | boolean
+  timingTaskTime?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
   wordNumber?: Prisma.IntFilter<"User"> | number
@@ -326,6 +356,9 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
+  isTimingTask?: Prisma.SortOrder
+  timingTaskTime?: Prisma.SortOrder
   password?: Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   wordNumber?: Prisma.SortOrder
@@ -349,6 +382,9 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   phone?: Prisma.StringWithAggregatesFilter<"User"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isTimingTask?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  timingTaskTime?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   wordNumber?: Prisma.IntWithAggregatesFilter<"User"> | number
@@ -364,6 +400,9 @@ export type UserCreateInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -382,6 +421,9 @@ export type UserUncheckedCreateInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -400,6 +442,9 @@ export type UserUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -418,6 +463,9 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -436,6 +484,9 @@ export type UserCreateManyInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -451,6 +502,9 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -466,6 +520,9 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -481,6 +538,9 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  isTimingTask?: Prisma.SortOrder
+  timingTaskTime?: Prisma.SortOrder
   password?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   wordNumber?: Prisma.SortOrder
@@ -501,6 +561,9 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  isTimingTask?: Prisma.SortOrder
+  timingTaskTime?: Prisma.SortOrder
   password?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   wordNumber?: Prisma.SortOrder
@@ -516,6 +579,9 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
+  isTimingTask?: Prisma.SortOrder
+  timingTaskTime?: Prisma.SortOrder
   password?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   wordNumber?: Prisma.SortOrder
@@ -541,6 +607,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -607,6 +677,9 @@ export type UserCreateWithoutWordBookRecordsInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -624,6 +697,9 @@ export type UserUncheckedCreateWithoutWordBookRecordsInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -657,6 +733,9 @@ export type UserUpdateWithoutWordBookRecordsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -674,6 +753,9 @@ export type UserUncheckedUpdateWithoutWordBookRecordsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -691,6 +773,9 @@ export type UserCreateWithoutPaymentRecordsInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -708,6 +793,9 @@ export type UserUncheckedCreateWithoutPaymentRecordsInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -741,6 +829,9 @@ export type UserUpdateWithoutPaymentRecordsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -758,6 +849,9 @@ export type UserUncheckedUpdateWithoutPaymentRecordsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -775,6 +869,9 @@ export type UserCreateWithoutCourseRecordsInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -792,6 +889,9 @@ export type UserUncheckedCreateWithoutCourseRecordsInput = {
   email?: string | null
   phone: string
   address?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string
   password: string
   avatar?: string | null
   wordNumber?: number
@@ -825,6 +925,9 @@ export type UserUpdateWithoutCourseRecordsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -842,6 +945,9 @@ export type UserUncheckedUpdateWithoutCourseRecordsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -908,6 +1014,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   phone?: boolean
   address?: boolean
+  bio?: boolean
+  isTimingTask?: boolean
+  timingTaskTime?: boolean
   password?: boolean
   avatar?: boolean
   wordNumber?: boolean
@@ -927,6 +1036,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   phone?: boolean
   address?: boolean
+  bio?: boolean
+  isTimingTask?: boolean
+  timingTaskTime?: boolean
   password?: boolean
   avatar?: boolean
   wordNumber?: boolean
@@ -942,6 +1054,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   phone?: boolean
   address?: boolean
+  bio?: boolean
+  isTimingTask?: boolean
+  timingTaskTime?: boolean
   password?: boolean
   avatar?: boolean
   wordNumber?: boolean
@@ -957,6 +1072,9 @@ export type UserSelectScalar = {
   email?: boolean
   phone?: boolean
   address?: boolean
+  bio?: boolean
+  isTimingTask?: boolean
+  timingTaskTime?: boolean
   password?: boolean
   avatar?: boolean
   wordNumber?: boolean
@@ -966,7 +1084,7 @@ export type UserSelectScalar = {
   lastLoginAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "password" | "avatar" | "wordNumber" | "dayNumber" | "createdAt" | "updatedAt" | "lastLoginAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "bio" | "isTimingTask" | "timingTaskTime" | "password" | "avatar" | "wordNumber" | "dayNumber" | "createdAt" | "updatedAt" | "lastLoginAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   wordBookRecords?: boolean | Prisma.User$wordBookRecordsArgs<ExtArgs>
   paymentRecords?: boolean | Prisma.User$paymentRecordsArgs<ExtArgs>
@@ -989,6 +1107,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string | null
     phone: string
     address: string | null
+    bio: string | null
+    isTimingTask: boolean
+    timingTaskTime: string
     password: string
     avatar: string | null
     wordNumber: number
@@ -1427,6 +1548,9 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly address: Prisma.FieldRef<"User", 'String'>
+  readonly bio: Prisma.FieldRef<"User", 'String'>
+  readonly isTimingTask: Prisma.FieldRef<"User", 'Boolean'>
+  readonly timingTaskTime: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly avatar: Prisma.FieldRef<"User", 'String'>
   readonly wordNumber: Prisma.FieldRef<"User", 'Int'>

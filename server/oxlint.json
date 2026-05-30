@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "rules": {
+    "no-debugger": "error",
+    "typescript/no-explicit-any": "warn"
+  }
+}

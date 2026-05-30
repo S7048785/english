@@ -10,58 +10,37 @@ html, body {
   text-overflow: ellipsis;
 }
 :root {
+  --ui-bg: #f6f7f8;
+  --ui-text-primary: var(--color-cyan-600);
+  --ui-secondary: white;
+  --ui-border: var(--color-neutral-200);
+  --ui-border-muted: var(--color-neutral-200);
+  --ui-border-accented: var(--color-neutral-300);
+  --ui-border-inverted: var(--color-neutral-900);
   --color-card-background: var(--color-blue-50);
-  /* 卡片/面板 */
-  --card: 255, 255, 255;              /* 卡片背景 */
-  --card-foreground: 15, 23, 42;      /* 卡片文字 */
 
-  /* 弹窗/模态框 */
-  --popover: 255, 255, 255;           /* 弹窗背景 */
-  --popover-foreground: 15, 23, 42;   /* 弹窗文字 */
-
-  /* 次要色调 (石板灰) */
-  --secondary: 241, 245, 249;         /* 浅灰背景 (slate-100) */
-  --secondary-foreground: 15, 23, 42; /* 深灰文字 */
-
-  /* 辅助/柔和色 */
-  --muted: 241, 245, 249;             /* 柔和背景 */
-  --muted-foreground: 100, 116, 139;  /* 柔和文字 (slate-500) */
-
-  /* 强调/高亮色 */
-  --accent: 241, 245, 249;            /* 强调背景 */
-  --accent-foreground: 15, 23, 42;    /* 强调文字 */
-
-  /* 危险/错误色 */
-  --destructive: 239, 68, 68;         /* 红色 (red-500) */
-  --destructive-foreground: 255, 255, 255;
-
-  /* 成功色 */
-  --success: 34, 197, 94;             /* 绿色 (green-500) */
-  --success-foreground: 255, 255, 255;
-
-  /* 警告色 */
-  --warning: 245, 158, 11;            /* 橙色 (orange-500) */
-  --warning-foreground: 255, 255, 255;
-
-  /* 信息色 */
-  --info: 59, 130, 246;               /* 蓝色 (blue-500) */
-  --info-foreground: 255, 255, 255;
-
-  /* 边框颜色 */
-  --border: 226, 232, 240;            /* 边框灰 (slate-200) */
-
-  /* 输入框 */
-  --input: 226, 232, 240;             /* 输入框背景/边框 */
-
-  /* 环形进度条 */
-  --ring: 139, 92, 246;               /* 聚焦环颜色 (与主色一致) */
-
-  /* 图表颜色 */
-  --chart-1: 139, 92, 246;            /* 紫色 */
-  --chart-2: 34, 197, 94;             /* 绿色 */
-  --chart-3: 245, 158, 11;            /* 橙色 */
-  --chart-4: 236, 72, 153;            /* 粉色 */
-  --chart-5: 14, 165, 233;            /* 青色 */
+  /* Chat 聊天区域 — 浅色模式 */
+  --color-chat-sidebar: #ffffff;
+  --color-chat-sidebar-item-hover: #f0f4f8;
+  --color-chat-sidebar-item-active: #e2e8f0;
+  --color-chat-sidebar-item-active-text: #1e293b;
+  --color-chat-grid-gap: #e2e8f0;
+  --color-chat-ai-bubble: #ffffff;
+  --color-chat-ai-bubble-text: #374151;
+  --color-chat-input: #ffffff;
+  --color-chat-option-border: #d1d5db;
+  --color-chat-option: #ffffff;
+  --color-chat-option-text: #6b7280;
+  --color-chat-option-hover-border: #9ca3af;
+  --color-chat-option-hover: #f9fafb;
+  --color-chat-option-hover-text: #374151;
+  --color-chat-option-active-border: #3b82f6;
+  --color-chat-option-active: #eff6ff;
+  --color-chat-option-active-text: #2563eb;
+  --color-chat-background: #f8fafc;
+  --color-chat-reasoning-bg: #f3f4f6;
+  --color-chat-reasoning-text: #6b7280;
+  --color-chat-reasoning-summary: #ca8a04;
 
   /* 特殊效果 */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -71,63 +50,32 @@ html, body {
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-.v-theme--dark {
-  --color-card-background: #171717;
-  /* 卡片/面板 */
-  --card: 30, 41, 59;                /* 卡片背景 (slate-800) */
-  --card-foreground: 248, 250, 252;
-
-  /* 弹窗/模态框 */
-  --popover: 30, 41, 59;             /* 弹窗背景 */
-  --popover-foreground: 248, 250, 252;
-
-  /* 主色调 (保持品牌色，但可以稍微调亮) */
-  --primary: 167, 139, 250;          /* 亮紫色 (violet-400) */
-  --primary-foreground: 15, 23, 42;  /* 深色文字保持对比度 */
-
-  /* 次要色调 */
-  --secondary: 51, 65, 85;           /* 深灰背景 (slate-700) */
-  --secondary-foreground: 248, 250, 252;
-
-  /* 辅助/柔和色 */
-  --muted: 51, 65, 85;               /* 柔和背景 */
-  --muted-foreground: 148, 163, 184; /* 柔和文字 (slate-400) */
-
-  /* 强调/高亮色 */
-  --accent: 51, 65, 85;              /* 强调背景 */
-  --accent-foreground: 248, 250, 252;
-
-  /* 危险/错误色 (保持红色但稍亮) */
-  --destructive: 248, 113, 113;      /* 亮红色 (red-400) */
-  --destructive-foreground: 15, 23, 42;
-
-  /* 成功色 */
-  --success: 74, 222, 128;           /* 亮绿色 (green-400) */
-  --success-foreground: 15, 23, 42;
-
-  /* 警告色 */
-  --warning: 251, 146, 60;           /* 亮橙色 (orange-400) */
-  --warning-foreground: 15, 23, 42;
-
-  /* 信息色 */
-  --info: 96, 165, 250;              /* 亮蓝色 (blue-400) */
-  --info-foreground: 15, 23, 42;
-
-  /* 边框颜色 */
-  --border: 51, 65, 85;              /* 深色边框 (slate-700) */
-
-  /* 输入框 */
-  --input: 51, 65, 85;               /* 输入框背景/边框 */
-
-  /* 环形进度条 */
-  --ring: 167, 139, 250;             /* 聚焦环颜色 */
-
-  /* 图表颜色 (深色模式下调亮) */
-  --chart-1: 167, 139, 250;          /* 亮紫色 */
-  --chart-2: 74, 222, 128;           /* 亮绿色 */
-  --chart-3: 251, 146, 60;           /* 亮橙色 */
-  --chart-4: 244, 114, 182;          /* 亮粉色 */
-  --chart-5: 56, 189, 248;           /* 亮青色 */
+.dark {
+  --ui-bg: #191e24;
+  --ui-secondary: #17212e;
+  --color-card-background: #1d232a;
+  /* Chat 聊天区域 — 深色模式 */
+  --color-chat-sidebar: #1d232a;
+  --color-chat-sidebar-item-hover: #252d36;
+  --color-chat-sidebar-item-active: #2c343d;
+  --color-chat-sidebar-item-active-text: #ffffff;
+  --color-chat-grid-gap: #2a323b;
+  --color-chat-ai-bubble: #2a323b;
+  --color-chat-ai-bubble-text: #d1d5db;
+  --color-chat-input: #0f172b;
+  --color-chat-option-border: #333333;
+  --color-chat-option: #1a1a1a;
+  --color-chat-option-text: #9ca3af;
+  --color-chat-option-hover-border: #6b7280;
+  --color-chat-option-hover: #2a2a2a;
+  --color-chat-option-hover-text: #e5e7eb;
+  --color-chat-option-active-border: #3b82f6;
+  --color-chat-option-active: #1e293b;
+  --color-chat-option-active-text: #60a5fa;
+  --color-chat-background: #1d232a;
+  --color-chat-reasoning-bg: rgba(31, 41, 55, 0.5);
+  --color-chat-reasoning-text: #9ca3af;
+  --color-chat-reasoning-summary: #facc15;
 
   /* 特殊效果 (深色模式下阴影更重) */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);

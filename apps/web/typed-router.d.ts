@@ -44,6 +44,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/chat': RouteRecordInfo<
+      '/chat',
+      '/chat',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/courses': RouteRecordInfo<
       '/courses',
       '/courses',
@@ -94,6 +101,12 @@ declare module 'vue-router/auto-routes' {
     'src/views/about.vue': {
       routes:
         | '/about'
+      views:
+        | never
+    }
+    'src/views/chat.vue': {
+      routes:
+        | '/chat'
       views:
         | never
     }

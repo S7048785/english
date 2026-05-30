@@ -2,15 +2,20 @@
   "name": "@en/common",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "types": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./models": "./models/index.ts",
-    "./word": "./word/index.ts"
+    ".": "./dist/index.js",
+    "./response": "./dist/response.js",
+    "./word": "./dist/word/index.js",
+    "./user": "./dist/user/index.js",
+    "./chat": "./dist/chat/index.js"
   },
   "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

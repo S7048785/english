@@ -1,27 +1,38 @@
-@import "tailwindcss/theme" layer(tailwind-theme);
-@import "tailwindcss/preflight" layer(tailwind-reset);
-@import "tailwindcss/utilities" layer(tailwind-utilities);
+@import "tailwindcss";
+@import "@nuxt/ui";
 @import "@/assets/main.css";
 
-/* dark/light mode — Vuetify uses .v-theme--dark/.v-theme--light instead of .dark */
-@custom-variant light (&:where(.v-theme--light, .v-theme--light *));
-@custom-variant dark (&:where(.v-theme--dark, .v-theme--dark *));
-/* @custom-variant dark (.v-theme--dark &);
-@custom-variant light (.v-theme--light &); */
-
-/* 2. 导入你的自定义变量文件 */
-
 @theme {
-  --breakpoint-*: initial;
-  /* reset Tailwind defaults */
-  /* keep in sync with vuetify plugin/config and settings.scss */
-  --breakpoint-xs: 0px;
-  --breakpoint-sm: 600px;
-  --breakpoint-md: 960px;
-  --breakpoint-lg: 1280px;
-  --breakpoint-xl: 1920px;
-  --breakpoint-xxl: 2560px;
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --ui-primary: var(--color-cyan-500);
+  --color-midnight: #4699ec;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca;
   --color-card-background: var(--color-card-background);
+  --color-chat-background: var(--color-chat-background);
+  --color-chat-sidebar: var(--color-chat-sidebar);
+  --color-chat-sidebar-item-hover: var(--color-chat-sidebar-item-hover);
+  --color-chat-sidebar-item-active: var(--color-chat-sidebar-item-active);
+  --color-chat-sidebar-item-active-text: var(--color-chat-sidebar-item-active-text);
+  --color-chat-grid-gap: var(--color-chat-grid-gap);
+  --color-chat-ai-bubble: var(--color-chat-ai-bubble);
+  --color-chat-ai-bubble-text: var(--color-chat-ai-bubble-text);
+  --color-chat-input: var(--color-chat-input);
+  --color-chat-option-border: var(--color-chat-option-border);
+  --color-chat-option: var(--color-chat-option);
+  --color-chat-option-text: var(--color-chat-option-text);
+  --color-chat-option-hover-border: var(--color-chat-option-hover-border);
+  --color-chat-option-hover: var(--color-chat-option-hover);
+  --color-chat-option-hover-text: var(--color-chat-option-hover-text);
+  --color-chat-option-active-border: var(--color-chat-option-active-border);
+  --color-chat-option-active: var(--color-chat-option-active);
+  --color-chat-option-active-text: var(--color-chat-option-active-text);
+  --color-chat-reasoning-bg: var(--color-chat-reasoning-bg);
+  --color-chat-reasoning-text: var(--color-chat-reasoning-text);
+  --color-chat-reasoning-summary: var(--color-chat-reasoning-summary);
+
+  /* --ui-text-primary: var(--color-cyan-600); */
 }
 
 /*
