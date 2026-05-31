@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user.ts";
-import { useSettingHook } from "@/hooks/setting";
+import { useSettingHook } from "@/composables/business/setting/useSetting.ts";
 
 definePage({
   meta: { requiresAuth: true }

@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/vue-form";
-import { UserUpdateSchema } from "@en/common";
+import { UserUpdateSchema } from "@en/common/index.ts";
 import {ref, shallowRef, useTemplateRef} from "vue";
 import { useUserStore } from "@/stores/user.ts";
 import { uploadAvatar, userUpdate } from "@/api/server/user.ts";

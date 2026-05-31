@@ -1,13 +1,62 @@
 <script setup lang="ts">
 
-const a = ref(1)
-const change = () => {
-  a.value++
+import { ref, onMounted } from 'vue';
+import type { CourseList } from '@en/common/course';
+import { AVATAR_UPLOAD_URL as uploadUrl } from '@/api/index.ts';
+import {getCourseList} from "@/api/server/course.ts";
+const list = ref<CourseList>([]);
+const getList = async () => {
+  const res = await getCourseList();
+  list.value = res.data;
 }
+const imageSrc = (url: string) => {
+  return uploadUrl + url;
+}
+onMounted(() => {
+  getList();
+})
+
 </script>
 
 <template>
- <A :a="a" @change="change"/>
+  <div class="min-h-[60vh]">
+    <div class="max-w-300 mx-auto px-4 pt-12 pb-24">
+      <!-- 标题 -->
+      <header class="mb-12 text-center">
+        <p class="text-sm font-medium text-indigo-600 tracking-wide uppercase mb-2">Vocabulary Courses</p>
+        <h1 class="text-3xl font-bold text-zinc-900 dark:text-gray-300 tracking-tight sm:text-4xl">精选课程</h1>
+        <p class="mt-3 text-zinc-500 text-sm max-w-md mx-auto">一次购买，长期有效 · 覆盖高考、考研、四六级、托福雅思等</p>
+      </header>
+
+      <!-- 课程卡片 3 列 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article v-for="item in list" :key="item.id"
+                 class="group bg-white dark:bg-[#1d232a] rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:shadow-indigo-500/5 hover:border-indigo-100 transition-all duration-300 flex flex-col">
+          <div class="relative aspect-4/3 bg-zinc-100 overflow-hidden">
+            <img :src="imageSrc(item.url)" :alt="item.name"
+                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+            <div
+                class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur text-xs font-medium text-zinc-600 shadow-sm">
+              词汇</div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-400 line-clamp-1">{{ item.name }}</h2>
+            <p class="mt-2 text-sm text-zinc-500 line-clamp-2 leading-relaxed flex-1">{{ item.description }}
+            </p>
+            <div class="mt-4 pt-4 border-t border-zinc-100 flex items-center justify-between gap-3">
+              <span class="text-xs text-zinc-400 truncate">讲师 {{ item.teacher }}</span>
+              <span class="text-lg font-bold text-indigo-600 shrink-0">¥{{ item.price}}</span>
+            </div>
+            <UButton type="button"
+                     block
+                    class="mt-4  py-2.5 rounded-xl text-sm font-medium text-indigo-600 border transition-colors cursor-pointer">
+              购买课程
+            </UButton>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>

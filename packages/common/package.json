@@ -10,7 +10,8 @@
     "./response": "./dist/response.js",
     "./word": "./dist/word/index.js",
     "./user": "./dist/user/index.js",
-    "./chat": "./dist/chat/index.js"
+    "./chat": "./dist/chat/index.js",
+    "./course": "./dist/course/index.js"
   },
   "scripts": {
     "build": "tsc",

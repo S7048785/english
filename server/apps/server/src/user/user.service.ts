@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CryptoService, PrismaService } from 'libs/shared/src';
-import type { TokenPayload, UserLogin, UserRegister } from '@en/common';
+import type { UserLogin, UserRegister } from '@en/common';
 import { Prisma } from 'libs/shared/src/generated/prisma/client';
 import { AuthService } from '../auth/auth.service';
 import { MinioService } from '@libs/shared/minio/minio.service';
@@ -146,7 +146,7 @@ export class UserService {
   }
 
   async update(userUpdateDto: UserUpdateDto, user: Request['user']) {
-    return await this.prisma.user.update({
+    return this.prisma.user.update({
       where: {
         id: user.userId,
       },
@@ -160,14 +160,14 @@ export class UserService {
         avatar: userUpdateDto.avatar,
       },
       select: userSelect,
-    })
+    });
   }
   async getUserInfo(userId: string) {
-    return await this.prisma.user.findUnique({
+    return this.prisma.user.findUnique({
       where: {
         id: userId
       },
       select: userSelect
-    })
+    });
   }
 }

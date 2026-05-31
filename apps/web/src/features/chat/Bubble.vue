@@ -1,29 +1,39 @@
 <script setup lang="tsx">
 import {Globe, Atom, Trash2} from '@lucide/vue';
-import {useUserStore} from "@/stores/user.ts";
-import {fetchEventSource} from "@microsoft/fetch-event-source";
 // import { Chat } from '@ai-sdk/vue';
 import { marked } from 'marked'
 import { markedHighlight } from 'marked-highlight'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
 import {useChatStore} from "@/stores/chat.ts";
-import {clearSession} from "@/api/ai/chat.ts";
-import type {ChatMessage} from "@en/common/chat";
+import {useBubble} from "@/composables/business/chat/useBubble.ts";
+import {useVoiceToText} from "@/composables/core/useVoiceToText.ts";
 // import {DefaultChatTransport} from "ai";
 const chatStore = useChatStore()
 
-const userStore = useUserStore()
+const {
+  message,
+  showClearConfirm,
+  handleClear,
+  sendMessage,
+  selected2,
+  isLoading,
+  chatRef
+} = useBubble()
 
-const message = ref()
+const { start, stop, isRecording, recognition } = useVoiceToText({})
+let isVoice = false;
+const toggleVoice = () => {
+  isVoice = !isVoice;
+  if (isVoice) {
+    start((msg: string) => {
+      message.value = msg
+    });
+  } else {
+    stop();
+  }
+};
 
-const showClearConfirm = ref(false)
-
-const handleClear = async () => {
-  await clearSession(chatStore.chatModeIndex, userStore.user!.id)
-  chatStore.clearMessages()
-  showClearConfirm.value = false
-}
 // 实例化 Chat
 // const chat = new Chat({
 //   transport: new DefaultChatTransport({
@@ -38,45 +48,6 @@ const handleClear = async () => {
 //     },
 //   }),
 // })
-const sendMessage = () => {
-  const userId = userStore.user!.id
-
-  chatStore.addMsg({role: 'human', content: message.value, id: Date.now().toString(), reasoning: ""})
-  const aiId = (Date.now() + 1).toString()
-  chatStore.addMsg({role: 'ai', content: '', id: aiId, reasoning: ""}) //添加AI的消息
-  const tempMsg = message.value
-  message.value = ''
-  isLoading.value = true
-  fetchEventSource('/ai/v1/chat', {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      role: chatStore.chatModeIndex,
-      content: tempMsg,
-      userId,
-      deepThink: selected2.value.deepThink,
-      webSearch: selected2.value.webSearch,
-    }),
-    onmessage: (event) => {
-      isLoading.value = false
-      if (event.data == '[DONE]') {
-        return
-      }
-      // 根据你后端的数据格式解析，这里假设 event.data 直接是文本片段
-      const chunk: ChatMessage = JSON.parse(event.data)
-      if (chunk.content) {
-        chatStore.addContent(chunk.content)
-      }
-      if (chunk.reasoning) {
-        chatStore.addReasoning(chunk.reasoning)
-      }
-    },
-    onclose: () => {
-    },
-  })
-}
 
 // 选项配置
 const options = [
@@ -84,13 +55,7 @@ const options = [
   {label: 'webSearch', value: <Globe size={16}/>, text: '联网搜索'}
 ] as const
 
-const selected2 = ref({
-  deepThink: false,
-  webSearch: false,
-})
-
 const selectOption = (value: typeof options[number]["label"]) => {
-
   selected2.value[value] = !selected2.value[value]
 }
 
@@ -116,16 +81,6 @@ const OptionButtons = () => {
   ))
 }
 
-const isLoading = ref(false)
-
-const chatRef = useTemplateRef("chatRef")
-watch(() => chatStore.list, () => {
-  nextTick(() => {
-    chatRef.value?.scrollIntoView({
-      // behavior: 'smooth'
-    })
-  })
-}, {deep: true, immediate: true});
 //markdown解析HTML
 marked.use(markedHighlight({
   langPrefix: 'hljs language-',
@@ -201,14 +156,14 @@ const parseMarkdown = (content: string) => {
                   </div>
                 </template>
               </UPopover>
-              <UButton icon="i-lucide-send" @click="sendMessage" size="lg" color="primary" variant="solid"/>
+              <div class="space-x-4">
+                <UButton @click="toggleVoice" icon="i-lucide-audio-lines"  size="lg" color="primary" variant="solid"></UButton>
+                <UButton icon="i-lucide-send" @click="sendMessage" size="lg" color="primary" variant="solid"/>
+              </div>
             </div>
           </div>
         </template>
       </UChatPrompt>
-
     </div>
   </div>
-
-
 </template>

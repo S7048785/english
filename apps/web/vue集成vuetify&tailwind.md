@@ -92,7 +92,7 @@ pnpm add @mdi/font -D # vuetify 会使用图标作为多选和单选框的图标
 @source inline('elevation-{0,1,2,3,4,5}');
 ```
 
-创建 src\plugins\index.ts
+创建 src\plugins\useSetting.ts
 ```js
 // Plugins
 import vuetify from './vuetify'

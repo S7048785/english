@@ -3,7 +3,7 @@ import {computed, onMounted, ref} from "vue";
 import {BookOpen, CirclePlay} from "@lucide/vue";
 import type {WordList, WordQueryDto} from "@en/common/word";
 import {getWordList} from "@/api/server/work-book";
-import {useAudio} from "@/composables/useAudio";
+import {useAudio} from "@/composables/core/useAudio.ts";
 
 const {playAudio} = useAudio({})
 
