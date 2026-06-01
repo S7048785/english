@@ -5,11 +5,12 @@ import { CryptoModule } from './utils/crypto.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MinioModule } from './minio/minio.module';
+import { PayModule } from './pay/pay.module';
 
 @Global()
 @Module({
   providers: [SharedService],
-  exports: [SharedService, PrismaModule, CryptoModule, JwtModule, ConfigModule, MinioModule],
+  exports: [SharedService, PrismaModule, CryptoModule, JwtModule, ConfigModule, MinioModule, PayModule],
   imports: [
     PrismaModule,
     CryptoModule,
@@ -26,6 +27,7 @@ import { MinioModule } from './minio/minio.module';
       inject: [ConfigService],
     }),
     MinioModule,
+    PayModule,
   ],
 })
 export class SharedModule {}

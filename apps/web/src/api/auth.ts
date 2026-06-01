@@ -42,7 +42,7 @@ export const InertRefresh = async (error: any) => {
 	// 处理未登录情况
 	if (!tokenStore.accessToken) {
 		useUserStore().logout()
-		await alert('用户未登录')
+		// await alert('用户未登录')
 		await router.replace('/')
 		return Promise.reject(error);
 	}
@@ -92,7 +92,7 @@ export const InertRefresh = async (error: any) => {
 		currentQueue.forEach(item => item.reject(e));
 		// token刷新失败，重新登录
 		useUserStore().logout()
-		await alert('用户未登录')
+		// await alert('用户未登录')
 		await router.replace('/')
 		return Promise.reject(e || error);
 	}

@@ -37,6 +37,7 @@
     "@swc/cli": "^0.8.1",
     "@swc/core": "^1.15.40",
     "@types/multer": "^2.1.0",
+    "alipay-sdk": "^4.14.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "langchain": "^1.4.2",

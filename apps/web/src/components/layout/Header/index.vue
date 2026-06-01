@@ -1,10 +1,13 @@
 <script setup lang="tsx">
 import { RouterLink } from 'vue-router'
 import { Sun, Star } from '@lucide/vue'
+import { useLoginModalStore } from '@/stores/user.ts'
 import { useUserStore } from "@/stores/user.ts";
 import { AVATAR_UPLOAD_URL } from "@/api";
 import {ref} from "vue";
 import type { NavigationMenuItem } from '@nuxt/ui'
+
+const loginModalStore = useLoginModalStore()
 
 const userStore = useUserStore()
 const menuList = ref<NavigationMenuItem[][]>([
@@ -111,7 +114,7 @@ const defaultAvatar = userStore.user ? `${AVATAR_UPLOAD_URL}${userStore.user.ava
                 <p class="text-sm">登录后可同步词库进度与打卡数据</p>
               </div>
             </div>
-            <UButton @click="() => {userStore.loginDialogVisible = true}" :color="'primary'" block variant="solid">去登陆
+            <UButton @click="() => {loginModalStore.setLoginDialogVisible(true)}" :color="'primary'" block variant="solid">去登陆
             </UButton>
           </div>
         </template>

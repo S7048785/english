@@ -11,7 +11,8 @@
     "./word": "./dist/word/index.js",
     "./user": "./dist/user/index.js",
     "./chat": "./dist/chat/index.js",
-    "./course": "./dist/course/index.js"
+    "./course": "./dist/course/index.js",
+    "./pay": "./dist/pay/index.js"
   },
   "scripts": {
     "build": "tsc",

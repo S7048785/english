@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, useTemplateRef} from "vue";
+import {ref} from "vue";
 import {useForm} from '@tanstack/vue-form'
 import { register} from "@/api/server/user.ts";
 import {UserRegisterSchema} from "@en/common";
@@ -52,99 +52,104 @@ function toggle() {
     <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">欢迎注册</h1>
     <p class="text-gray-500 text-sm">请填写以下信息以完成注册</p>
   </div>
-  <form @submit.prevent.stop="form.handleSubmit" class="space-y-2">
+  <form @submit.prevent.stop="form.handleSubmit" class="space-y-4">
     <div>
-      <form.Field :name="'name'">
+      <form.Field name="name">
         <template v-slot="{field}">
-          <div class="text-body-large text-medium-emphasis">用户名</div>
-          <v-text-field
+          <div class="text-sm font-medium text-default mb-1">用户名</div>
+          <UInput
               :value="field.state.value"
-              @update:modelValue="(value: string) => field.handleChange(value)"
-              :error-messages="field.state.value ? field.state.meta.errors[0]?.message : ''"
-              density="comfortable"
+              @update:modelValue="field.handleChange as any"
               placeholder="输入用户名"
               autocomplete="off"
-              prepend-inner-icon="mdi-account-outline"
-              variant="outlined"
-          ></v-text-field>
+              icon="i-lucide-user"
+              variant="outline"
+              size="lg"
+              class="w-full"
+          />
+          <div v-if="field.state.value && field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">{{ field.state.meta.errors[0]?.message }}</div>
         </template>
       </form.Field>
     </div>
     <div>
       <form.Field name="phone">
         <template v-slot="{ field }">
-          <div class="text-body-large text-medium-emphasis">手机号</div>
-          <v-text-field
+          <div class="text-sm font-medium text-default mb-1">手机号</div>
+          <UInput
               :value="field.state.value"
-              @update:modelValue="(value: string) => field.handleChange(value)"
-              :error-messages="field.state.value ? field.state.meta.errors[0]?.message : ''"
-              density="comfortable"
+              @update:modelValue="field.handleChange as any"
               placeholder="输入手机号"
               autocomplete="off"
-              prepend-inner-icon="mdi-phone-outline"
-              variant="outlined"
-          ></v-text-field>
+              icon="i-lucide-phone"
+              variant="outline"
+              size="lg"
+              class="w-full"
+          />
+          <div v-if="field.state.value && field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">{{ field.state.meta.errors[0]?.message }}</div>
         </template>
       </form.Field>
     </div>
     <div>
       <form.Field name="password">
         <template v-slot="{ field }">
-          <div class="text-body-large text-medium-emphasis d-flex align-center justify-space-between">
-            密码
-          </div>
-          <v-text-field
+          <div class="text-sm font-medium text-default mb-1">密码</div>
+          <UInput
               :value="field.state.value"
-              @update:modelValue="(value: string) => field.handleChange(value)"
-              :error-messages="field.state.value ? field.state.meta.errors[0]?.message : ''"
-              :append-inner-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+              @update:modelValue="field.handleChange as any"
               :type="passwordVisible ? 'text' : 'password'"
-              density="comfortable"
               placeholder="输入密码"
-              prepend-inner-icon="mdi-lock-outline"
-              variant="outlined"
               autocomplete="current-password"
-              @click:append-inner="passwordVisible = !passwordVisible"
-          ></v-text-field>
+              icon="i-lucide-lock"
+              variant="outline"
+              size="lg"
+              class="w-full"
+          >
+            <template #trailing>
+              <button type="button" tabindex="-1" class="cursor-pointer" @click="passwordVisible = !passwordVisible">
+                <UIcon :name="passwordVisible ? 'i-lucide-eye-off' : 'i-lucide-eye'" class="size-4 text-muted" />
+              </button>
+            </template>
+          </UInput>
+          <div v-if="field.state.value && field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">{{ field.state.meta.errors[0]?.message }}</div>
         </template>
       </form.Field>
     </div>
     <div>
       <form.Field name="email">
         <template v-slot="{ field }">
-          <div class="text-body-large text-medium-emphasis">邮箱号 (可选)</div>
-          <v-text-field
+          <div class="text-sm font-medium text-default mb-1">邮箱号 (可选)</div>
+          <UInput
               :value="field.state.value"
-              @update:modelValue="(value: string) => field.handleChange(value)"
-              :error-messages="!field.state.value ? '' : field.state.meta.errors[0]?.message"
-              density="comfortable"
+              @update:modelValue="field.handleChange as any"
               placeholder="输入邮箱"
               autocomplete="off"
-              prepend-inner-icon="mdi-email-outline"
-              variant="outlined"
-          ></v-text-field>
+              icon="i-lucide-mail"
+              variant="outline"
+              size="lg"
+              class="w-full"
+          />
+          <div v-if="field.state.value && field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">{{ field.state.meta.errors[0]?.message }}</div>
         </template>
       </form.Field>
     </div>
 
-    <div @click="toggle" class="text-right text-body-small text-decoration-none text-blue cursor-pointer">
+    <div @click="toggle" class="text-right text-xs text-primary no-underline cursor-pointer">
       已有账号?
     </div>
     <form.Subscribe>
       <template v-slot="{ isSubmitting }">
-        <v-btn
+        <UButton
             class="my-8"
-            color="blue"
-            size="large"
-            variant="tonal"
+            color="primary"
+            size="lg"
+            :loading="isSubmitting"
             type="submit"
             block
         >
-          {{ isSubmitting ? '...' : '注册' }}
-        </v-btn>
+          注册
+        </UButton>
       </template>
     </form.Subscribe>
-
   </form>
 </template>
 

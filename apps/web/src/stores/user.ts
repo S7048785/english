@@ -5,8 +5,6 @@ import {logout as logoutApi} from "@/api/server/user.ts";
 import {AVATAR_UPLOAD_URL} from "@/api";
 
 export const useUserStore = defineStore('userStore', () => {
-	const loginDialogVisible = ref(false)
-
 	const user = ref<UserResult | null>()
 
 	const setUser = (param: UserResult) => {
@@ -20,13 +18,20 @@ export const useUserStore = defineStore('userStore', () => {
 		logoutApi()
 	}
 	return {
-		loginDialogVisible,
 		defaultAvatar,
 		user,
 		setUser,
 		logout
 	}
 }, {persist: true})
+
+export const useLoginModalStore = defineStore('loginModalStore', () => {
+	const loginDialogVisible = ref(false)
+	const setLoginDialogVisible = (param: boolean) => {
+		loginDialogVisible.value = param
+	}
+	return {loginDialogVisible, setLoginDialogVisible}
+})
 
 export const useTokenStore = defineStore('tokenStore', () => {
 	const accessToken = ref<string | null>(null)

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes, handleHotUpdate } from 'vue-router/auto-routes'
-import {useUserStore} from "@/stores/user.ts";
+import {useLoginModalStore, useUserStore} from "@/stores/user.ts";
 
 
 export const router = createRouter({
@@ -11,10 +11,11 @@ export const router = createRouter({
 // 全局前置守卫
 router.beforeEach((to, from) => {
   const userStore = useUserStore()
+  const loginModalStore = useLoginModalStore()
 
   // 配合文件路由中定义的 meta 属性做判断
   if (to.meta.requiresAuth && !userStore.user) {
-    userStore.loginDialogVisible = true
+    loginModalStore.setLoginDialogVisible(true)
     return false
   }
   return true
