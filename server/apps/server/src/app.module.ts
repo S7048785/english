@@ -8,9 +8,10 @@ import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { AuthModule } from './auth/auth.module';
 import { CourseModule } from './course/course.module';
+import { PayModule } from './pay/pay.module';
 
 @Module({
-  imports: [UserModule, SharedModule, WorkBookModule, AuthModule, CourseModule],
+  imports: [UserModule, SharedModule, WorkBookModule, AuthModule, CourseModule, PayModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_PIPE,      // ← 这是 NestJS 的依赖注入 token

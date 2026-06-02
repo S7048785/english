@@ -44,6 +44,13 @@ const handlePurchase = (course: Course) => {
   }
 };
 
+const isPay = ref(false);
+const timeExpire = ref(0);
+const onPay = () => {
+  console.log({
+    id: selectedCourse.value!.id
+  });
+}
 onMounted(() => {
   getList();
   getPurchasedList();
@@ -136,7 +143,7 @@ onMounted(() => {
         </template>
         <template #footer="{ close }">
           <UButton label="取消" color="neutral" variant="outline" @click="close" />
-          <UButton label="确认购买" color="primary" />
+          <UButton label="确认购买" color="primary" @click="onPay"/>
         </template>
       </UModal>
     </div>
