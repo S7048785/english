@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JsonWebTokenError, JwtService, TokenExpiredError } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import { RefreshTokenPayload, TokenPayload } from '@en/common';
 
 @Injectable()
@@ -10,23 +10,40 @@ export class AuthService {
   private readonly refreshThreshold = 24 * 60 * 60; // 1天 = 86400秒
 
   generateToken(payload: TokenPayload) {
-    return { accessToken: this.jwtService.sign<RefreshTokenPayload>({...payload, tokenType: 'access'}), refreshToken: this.jwtService.sign<RefreshTokenPayload>({...payload, tokenType: 'refresh'}, {expiresIn: '7d'}) };
+    return {
+      accessToken: this.jwtService.sign<RefreshTokenPayload>({
+        ...payload,
+        tokenType: 'access',
+      }),
+      refreshToken: this.jwtService.sign<RefreshTokenPayload>(
+        { ...payload, tokenType: 'refresh' },
+        { expiresIn: '7d' },
+      ),
+    };
   }
 
   verifyToken(token: string) {
-      const user = this.jwtService.verify<RefreshTokenPayload & { exp: number, iat: number}>(token);
-      if (user.tokenType !== 'refresh') {
-        throw new UnauthorizedException('refreshToken已过期或无效');
-      }
-      return this.refreshToken({
+    const user = this.jwtService.verify<
+      RefreshTokenPayload & { exp: number; iat: number }
+    >(token);
+    if (user.tokenType !== 'refresh') {
+      throw new UnauthorizedException('refreshToken已过期或无效');
+    }
+    return this.refreshToken(
+      {
         userId: user.userId,
         email: user.email,
         name: user.name,
-      }, user.exp)
+      },
+      user.exp,
+    );
   }
 
   refreshToken(payload: TokenPayload, exp: number) {
-    const accessToken = this.jwtService.sign<RefreshTokenPayload>({...payload, tokenType: 'access'});
+    const accessToken = this.jwtService.sign<RefreshTokenPayload>({
+      ...payload,
+      tokenType: 'access',
+    });
 
     const currentTime = Math.floor(Date.now() / 1000);
     const remainingTime = exp - currentTime;
@@ -35,13 +52,19 @@ export class AuthService {
     if (remainingTime <= this.refreshThreshold) {
       return {
         accessToken, // 访问令牌，有效期 15 分钟(已在shardModule.ts中配置)
-        refreshToken: this.jwtService.sign<RefreshTokenPayload>({...payload, tokenType: 'refresh'}, {expiresIn: '7d'}) // 刷新令牌 7 天
-      }
+        refreshToken: this.jwtService.sign<RefreshTokenPayload>(
+          {
+            ...payload,
+            tokenType: 'refresh',
+          },
+          { expiresIn: '7d' },
+        ), // 刷新令牌 7 天
+      };
     } else {
       return {
         accessToken, // 访问令牌，有效期 15 分钟(已在shardModule.ts中配置)
-        refreshToken: null
-      }
+        refreshToken: null,
+      };
     }
   }
 }

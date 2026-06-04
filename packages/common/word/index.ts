@@ -54,4 +54,3 @@ export type WordList = {
 	total: number;
 }
 
-export type WordQueryDto = z.output<typeof WordQuerySchema>

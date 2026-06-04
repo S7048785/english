@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ESNext"
+    ],
+    "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+    "paths": {
+      /* Specify a set of entries that re-map imports to additional lookup locations. */
+      "@/*": ["./src/*"],
+      "@env": ["./env.config.ts"]
+    },
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "types": [
+      "bun-types" // add Bun global
+    ]
+  }
+}

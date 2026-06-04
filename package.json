@@ -2,6 +2,7 @@
 	"scripts": {
 		"web": "pnpm --filter @en/web dev",
 		"server": "pnpm --filter @en/server start:dev",
+		"elysia": "pnpm --filter @en/server-elysia start",
 		"ai": "pnpm --filter @en/server start:dev ai",
 		"all": "concurrently \"pnpm run web\" \"pnpm run server\" \"pnpm run ai\"",
 		"two": "concurrently \"pnpm run web\" \"pnpm run server\""
