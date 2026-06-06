@@ -5,8 +5,7 @@
 pnpm monorepo 英语学习应用。三个工作区根目录：`apps/*`、`server`、`packages/*`。
 
 **前端**: `apps/web` — Vue 3 + Vite + Tailwind CSS + Nuxt UI + Pinia  
-**旧后端 (NestJS)**: `server/` — NestJS 单仓库含两个应用 + 共享库 (不再维护)
-**新后端 (Elysia)**: `apps/server` — Elysia + Bun + Drizzle ORM (重构旧后端)
+**后端 (NestJS)**: `server/` — NestJS 单仓库含两个应用 + 共享库 
 **共享包**: `packages/common` (`@en/common`)、`packages/config` (`@en/config`)
 
 ## 命令

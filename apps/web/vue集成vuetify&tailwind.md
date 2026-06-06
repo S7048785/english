@@ -1,4 +1,5 @@
 安装 Vuetify 和 Tailwindcss
+
 ```bash
 pnpm add vuetify
 pnpm add -D tailwindcss @tailwindcss/vite
@@ -6,6 +7,7 @@ pnpm add @mdi/font -D # vuetify 会使用图标作为多选和单选框的图标
 ```
 
 创建 src\styles\layers.css
+
 ```css
 @layer tailwind-theme;
 @layer tailwind-reset;
@@ -21,6 +23,7 @@ pnpm add @mdi/font -D # vuetify 会使用图标作为多选和单选框的图标
 ```
 
 创建 src\styles\tailwind.css
+
 ```css
 @import "tailwindcss/theme" layer(tailwind-theme);
 @import "tailwindcss/preflight" layer(tailwind-reset);
@@ -93,6 +96,7 @@ pnpm add @mdi/font -D # vuetify 会使用图标作为多选和单选框的图标
 ```
 
 创建 src\plugins\useSetting.ts
+
 ```js
 // Plugins
 import vuetify from './vuetify'
@@ -111,6 +115,7 @@ export function registerPlugins(app: App) {
 ```
 
 创建 src\plugins\vuetify.ts
+
 ```js
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -130,15 +135,16 @@ export default createVuetify({
 })
 ```
 
-在 main.ts 中引入 tailwind.css
+在 index.ts 中引入 tailwind.css
+
 ```js
 import './styles/tailwind.css'
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 
 import App from './App.vue'
-import { registerPlugins } from './plugins'
+import {registerPlugins} from './plugins'
 
 const app = createApp(App)
 
@@ -148,6 +154,7 @@ app.mount('#app')
 ```
 
 将 tailwind 注册到vite.config.ts
+
 ```js
 import tailwindcss from '@tailwindcss/vite'
 
@@ -160,6 +167,7 @@ export default defineConfig({
 ```
 
 要实现 tailwind 与 vuetify 的主题同步必须用 v-app 标签包裹组件
+
 ```vue
 <script>
 //  App.vue
@@ -190,11 +198,11 @@ export default defineConfig({
 </template>
 ```
 
-
 ## 自定义主题样式
 
 tailwind主题样式使用css变量实现
 浅色主题使用:root和 深色主题使用.v-theme--dark(不能使用.dark)
+
 ```css
 :root {
   --color-card-background: #fff
@@ -211,6 +219,7 @@ tailwind主题样式使用css变量实现
 
 vuetify主题使用 createVuetify
 在src\plugins\vuetify.ts中配置主题
+
 ```js
 export default createVuetify({
 	components,
