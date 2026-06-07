@@ -1,6 +1,6 @@
-
-html, body {
-  @apply size-full
+html,
+body {
+  @apply size-full;
 }
 .truncate-2 {
   display: -webkit-box;

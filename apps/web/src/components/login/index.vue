@@ -1,24 +1,23 @@
 <script setup lang="ts">
 import LoginForm from "@/components/login/LoginForm.vue";
 import RegisterForm from "@/components/login/RegisterForm.vue";
-import { ref} from "vue";
-import {useLoginModalStore} from "@/stores/user.ts";
-import type {LoginType} from "@/components/login/type.ts";
+import { ref } from "vue";
+import { useLoginModalStore } from "@/stores/user.ts";
+import type { LoginType } from "@/components/login/type.ts";
 
 defineOptions({
-  name: 'LoginDialog'
-})
-const loginModalStore = useLoginModalStore()
+  name: "LoginDialog",
+});
+const loginModalStore = useLoginModalStore();
 
-const loginModel = ref<LoginType>('LOGIN')
+const loginModel = ref<LoginType>("LOGIN");
 
 const toggleLoginModel = () => {
-  loginModel.value = loginModel.value === 'LOGIN' ? 'REGISTER' : 'LOGIN'
-}
+  loginModel.value = loginModel.value === "LOGIN" ? "REGISTER" : "LOGIN";
+};
 </script>
 
 <template>
-
   <UModal v-model:open="loginModalStore.loginDialogVisible" title="">
     <template #body>
       <div class="size-full grid grid-cols-1">
@@ -28,8 +27,8 @@ const toggleLoginModel = () => {
         <!-- 右侧登录表单区域 -->
         <div class="flex items-center">
           <div class="w-full">
-            <LoginForm v-if="loginModel === 'LOGIN'" @toggle="toggleLoginModel"/>
-            <RegisterForm v-if="loginModel === 'REGISTER'" @toggle="toggleLoginModel"/>
+            <LoginForm v-if="loginModel === 'LOGIN'" @toggle="toggleLoginModel" />
+            <RegisterForm v-if="loginModel === 'REGISTER'" @toggle="toggleLoginModel" />
           </div>
         </div>
       </div>

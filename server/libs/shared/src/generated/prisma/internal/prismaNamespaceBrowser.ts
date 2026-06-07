@@ -81,16 +81,16 @@ export const UserScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   address: 'address',
-  bio: 'bio',
-  isTimingTask: 'isTimingTask',
-  timingTaskTime: 'timingTaskTime',
   password: 'password',
   avatar: 'avatar',
   wordNumber: 'wordNumber',
   dayNumber: 'dayNumber',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  lastLoginAt: 'lastLoginAt'
+  lastLoginAt: 'lastLoginAt',
+  bio: 'bio',
+  isTimingTask: 'isTimingTask',
+  timingTaskTime: 'timingTaskTime'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -147,7 +147,8 @@ export const PaymentRecordScalarFieldEnum = {
   tradeStatus: 'tradeStatus',
   sendPayTime: 'sendPayTime',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  course_id: 'course_id'
 } as const
 
 export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]

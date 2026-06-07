@@ -5,12 +5,20 @@ import { CryptoModule } from './utils/crypto.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MinioModule } from './minio/minio.module';
-import { PayModule } from './pay/pay.module';
+import { AlipayModule } from './pay/pay.module';
 
 @Global()
 @Module({
   providers: [SharedService],
-  exports: [SharedService, PrismaModule, CryptoModule, JwtModule, ConfigModule, MinioModule, PayModule],
+  exports: [
+    SharedService,
+    PrismaModule,
+    CryptoModule,
+    JwtModule,
+    ConfigModule,
+    MinioModule,
+    AlipayModule,
+  ],
   imports: [
     PrismaModule,
     CryptoModule,
@@ -22,12 +30,12 @@ import { PayModule } from './pay/pay.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('SECRET_KEY'), //秘钥
-        signOptions: { expiresIn: 10 }, //10秒过期 方便测试
+        signOptions: { expiresIn: 10 * 60 }, //10秒过期 方便测试
       }),
       inject: [ConfigService],
     }),
     MinioModule,
-    PayModule,
+    AlipayModule,
   ],
 })
 export class SharedModule {}

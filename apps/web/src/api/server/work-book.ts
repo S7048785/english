@@ -1,6 +1,6 @@
 import { serverInstance } from "@/api";
-import type { Word, WordList, WordQueryDto } from '@en/common';
-import {type Result} from "@en/common";
+import type { Word, WordList, WordQueryDto } from "@en/common";
+import { type Result } from "@en/common";
 
 /** 获取单词列表 */
 export function getWordList(params: WordQueryDto): Result<WordList> {

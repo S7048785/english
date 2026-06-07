@@ -1,63 +1,62 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import { useForm } from '@tanstack/vue-form'
-import {getPublicKey as getPublicKeyApi, login} from "@/api/server/user.ts";
-import {encryptWithPublicKey} from "@/utils/crypto.ts";
-import {UserLoginSchema} from "@en/common";
-import {toast} from "vue-sonner";
-import {useTokenStore, useUserStore, useLoginModalStore} from "@/stores/user.ts";
+import { ref } from "vue";
+import { useForm } from "@tanstack/vue-form";
+import { getPublicKey as getPublicKeyApi, login } from "@/api/server/user.ts";
+import { encryptWithPublicKey } from "@/utils/crypto.ts";
+import { UserLoginSchema } from "@en/common";
+import { toast } from "vue-sonner";
+import { useTokenStore, useUserStore, useLoginModalStore } from "@/stores/user.ts";
 
 const emit = defineEmits<{
-  toggle: []
-}>()
+  toggle: [];
+}>();
 
-const passwordVisible = ref(false)
-const loginModalStore = useLoginModalStore()
-const userStore = useUserStore()
+const passwordVisible = ref(false);
+const loginModalStore = useLoginModalStore();
+const userStore = useUserStore();
 
-let publicKey = ''
+let publicKey = "";
 const getPublicKey = async () => {
   if (!publicKey) {
-    const {data} = await getPublicKeyApi()
-    publicKey = data
+    const { data } = await getPublicKeyApi();
+    publicKey = data;
   }
-  return publicKey
-}
+  return publicKey;
+};
 const form = useForm({
   defaultValues: {
-    phone: '',
-    password: ''
+    phone: "",
+    password: "",
   },
   validators: {
-    onChange: UserLoginSchema
+    onChange: UserLoginSchema,
   },
   onSubmit: async ({ value }) => {
     // Do something with form data
 
-    console.log(value)
+    console.log(value);
 
     // 获取公钥
-    const publicKey = await getPublicKey()
+    const publicKey = await getPublicKey();
     // 加密密码
-    const encryptedPassword = await encryptWithPublicKey(value.password, publicKey)
+    const encryptedPassword = await encryptWithPublicKey(value.password, publicKey);
 
     try {
-      const res = await login({ phone: value.phone, password: encryptedPassword })
-      userStore.setUser(res.data.user)
+      const res = await login({ phone: value.phone, password: encryptedPassword });
+      userStore.setUser(res.data.user);
 
-      useTokenStore().setAccessToken(res.data.token)
-      toast.success('登录成功')
-      loginModalStore.setLoginDialogVisible(false)
-    } catch(e: any) {
-      toast.error(e.response.data.message || '注册失败')
+      useTokenStore().setAccessToken(res.data.token);
+      toast.success("登录成功");
+      loginModalStore.setLoginDialogVisible(false);
+    } catch (e: any) {
+      toast.error(e.response.data.message || "注册失败");
     }
   },
-})
+});
 
 function toggle() {
-  emit('toggle')
+  emit("toggle");
 }
-
 </script>
 
 <template>
@@ -80,7 +79,9 @@ function toggle() {
             size="lg"
             class="w-full"
           />
-          <div v-if="field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">{{ field.state.meta.errors[0]?.message }}</div>
+          <div v-if="field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">
+            {{ field.state.meta.errors[0]?.message }}
+          </div>
         </template>
       </form.Field>
     </div>
@@ -110,12 +111,22 @@ function toggle() {
             class="w-full"
           >
             <template #trailing>
-              <button type="button" tabindex="-1" class="cursor-pointer" @click="passwordVisible = !passwordVisible">
-                <UIcon :name="passwordVisible ? 'i-lucide-eye-off' : 'i-lucide-eye'" class="size-4 text-muted" />
+              <button
+                type="button"
+                tabindex="-1"
+                class="cursor-pointer"
+                @click="passwordVisible = !passwordVisible"
+              >
+                <UIcon
+                  :name="passwordVisible ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+                  class="size-4 text-muted"
+                />
               </button>
             </template>
           </UInput>
-          <div v-if="field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">{{ field.state.meta.errors[0]?.message }}</div>
+          <div v-if="field.state.meta.errors?.[0]?.message" class="text-xs text-error mt-1">
+            {{ field.state.meta.errors[0]?.message }}
+          </div>
         </template>
       </form.Field>
     </div>
@@ -124,14 +135,7 @@ function toggle() {
     </div>
     <form.Subscribe>
       <template v-slot="{ isSubmitting }">
-        <UButton
-          class="my-8"
-          color="primary"
-          size="lg"
-          :loading="isSubmitting"
-          type="submit"
-          block
-        >
+        <UButton class="my-8" color="primary" size="lg" :loading="isSubmitting" type="submit" block>
           登录
         </UButton>
       </template>
@@ -139,6 +143,4 @@ function toggle() {
   </form>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

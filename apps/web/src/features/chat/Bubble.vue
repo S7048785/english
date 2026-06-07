@@ -102,7 +102,10 @@ const parseMarkdown = (content: string) => {
   <div class="p-5 h-160 bg-chat-background grid grid-rows-[5fr_1fr] relative">
     <div class="overflow-y-auto">
       <div v-for="(item, index) in chatStore.list" :key="index">
-        <div class="flex justify-end items-center  gap-4 mt-5 mb-5 mr-5" v-if="item.role === 'human'">
+        <div
+          class="flex justify-end items-center gap-4 mt-5 mb-5 mr-5"
+          v-if="item.role === 'human'"
+        >
           <div class="text-sm text-white max-w-[80%] rounded-lg p-2 bg-blue-500 shadow-md">
             {{ item.content }}
           </div>
@@ -111,18 +114,26 @@ const parseMarkdown = (content: string) => {
           </div>
         </div>
         <div class="flex justify-start gap-4 mt-5 mb-5" v-else>
-          <div> <UAvatar size="lg">AI</UAvatar></div>
+          <div><UAvatar size="lg">AI</UAvatar></div>
           <div>
-             <div v-if="item.reasoning"
-                  class="text-xs text-chat-reasoning-text max-w-[80%] bg-chat-reasoning-bg rounded-lg p-2 mb-2 border-l-2 border-yellow-500">
-               <details open>
-                 <summary class="cursor-pointer text-chat-reasoning-summary font-medium text-xs mb-1">Deep Think</summary>
-                 <div v-html="parseMarkdown(item.reasoning)" />
-               </details>
-             </div>
-            <div v-if="item.role === 'ai' && item.content !== ''"
-                 class="text-sm text-chat-ai-bubble-text max-w-[80%] bg-chat-ai-bubble rounded-lg p-2"
-                 v-html="parseMarkdown(item.content)" />
+            <div
+              v-if="item.reasoning"
+              class="text-xs text-chat-reasoning-text max-w-[80%] bg-chat-reasoning-bg rounded-lg p-2 mb-2 border-l-2 border-yellow-500"
+            >
+              <details open>
+                <summary
+                  class="cursor-pointer text-chat-reasoning-summary font-medium text-xs mb-1"
+                >
+                  Deep Think
+                </summary>
+                <div v-html="parseMarkdown(item.reasoning)" />
+              </details>
+            </div>
+            <div
+              v-if="item.role === 'ai' && item.content !== ''"
+              class="text-sm text-chat-ai-bubble-text max-w-[80%] bg-chat-ai-bubble rounded-lg p-2"
+              v-html="parseMarkdown(item.content)"
+            />
           </div>
         </div>
       </div>
@@ -134,7 +145,14 @@ const parseMarkdown = (content: string) => {
     </div>
 
     <div>
-      <UChatPrompt v-model="message" @submit="sendMessage" :rows="3" :maxrows="3" variant="soft" class="bg-chat-input">
+      <UChatPrompt
+        v-model="message"
+        @submit="sendMessage"
+        :rows="3"
+        :maxrows="3"
+        variant="soft"
+        class="bg-chat-input"
+      >
         <!--              <UChatPromptSubmit :status="chat.status" />-->
         <template #footer>
           <div class="flex justify-between items-center w-full">
@@ -143,22 +161,48 @@ const parseMarkdown = (content: string) => {
             </div>
             <div>
               <UPopover v-model:open="showClearConfirm">
-                <UButton icon="i-lucide-trash-2" size="sm" color="neutral" variant="ghost" class="absolute top-5 right-5 z-10" />
+                <UButton
+                  icon="i-lucide-trash-2"
+                  size="sm"
+                  color="neutral"
+                  variant="ghost"
+                  class="absolute top-5 right-5 z-10"
+                />
                 <template #content>
                   <div class="p-4 text-center min-w-56">
                     <Trash2 class="mx-auto mb-3 text-red-500" :size="32" />
                     <p class="text-sm font-semibold mb-1">确认清空对话</p>
                     <p class="text-xs text-gray-500 mb-4">清空后将无法恢复，确定要继续吗？</p>
                     <div class="flex justify-center gap-2">
-                      <UButton size="sm" color="neutral" variant="outline" @click="showClearConfirm = false">取消</UButton>
-                      <UButton size="sm" color="error" variant="solid" @click="handleClear">确认清空</UButton>
+                      <UButton
+                        size="sm"
+                        color="neutral"
+                        variant="outline"
+                        @click="showClearConfirm = false"
+                        >取消</UButton
+                      >
+                      <UButton size="sm" color="error" variant="solid" @click="handleClear"
+                        >确认清空</UButton
+                      >
                     </div>
                   </div>
                 </template>
               </UPopover>
               <div class="space-x-4">
-                <UButton @click="toggleVoice" icon="i-lucide-audio-lines"  size="lg" color="primary" variant="solid"></UButton>
-                <UButton icon="i-lucide-send" @click="sendMessage" size="lg" color="primary" variant="solid"/>
+                <UButton
+                  @click="toggleVoice"
+                  icon="i-lucide-audio-lines"
+                  size="lg"
+                  color="primary"
+                  variant="solid"
+                ></UButton>
+                <UButton
+                  icon="i-lucide-send"
+                  @click="sendMessage"
+                  size="lg"
+                  color="primary"
+                  variant="solid"
+                />
               </div>
             </div>
           </div>

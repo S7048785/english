@@ -1,1 +1,1 @@
-export type LoginType = 'LOGIN' | 'REGISTER'
+export type LoginType = "LOGIN" | "REGISTER";

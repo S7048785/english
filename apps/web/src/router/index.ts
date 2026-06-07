@@ -1,26 +1,25 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes, handleHotUpdate } from 'vue-router/auto-routes'
-import {useLoginModalStore, useUserStore} from "@/stores/user.ts";
-
+import { createRouter, createWebHistory } from "vue-router";
+import { routes, handleHotUpdate } from "vue-router/auto-routes";
+import { useLoginModalStore, useUserStore } from "@/stores/user.ts";
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
 // 全局前置守卫
 router.beforeEach((to, from) => {
-  const userStore = useUserStore()
-  const loginModalStore = useLoginModalStore()
+  const userStore = useUserStore();
+  const loginModalStore = useLoginModalStore();
 
   // 配合文件路由中定义的 meta 属性做判断
   if (to.meta.requiresAuth && !userStore.user) {
-    loginModalStore.setLoginDialogVisible(true)
-    return false
+    loginModalStore.setLoginDialogVisible(true);
+    return false;
   }
-  return true
-})
+  return true;
+});
 
 if (import.meta.hot) {
-  handleHotUpdate(router)
+  handleHotUpdate(router);
 }

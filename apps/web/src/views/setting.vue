@@ -3,8 +3,8 @@ import { useUserStore } from "@/stores/user.ts";
 import { useSettingHook } from "@/composables/business/setting/useSetting.ts";
 
 definePage({
-  meta: { requiresAuth: true }
-})
+  meta: { requiresAuth: true },
+});
 const {
   form,
   isTimingTaskSwitch,
@@ -15,9 +15,9 @@ const {
   triggerUpload,
   resetForm,
   uploadFile,
-} = useSettingHook()
+} = useSettingHook();
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -43,13 +43,15 @@ const userStore = useUserStore()
           <p class="text-lg">头像</p>
           <div class="my-4"></div>
           <div class="flex gap-x-4 items-center">
-            <img :src="avatarPreview" alt="avatar" class="w-18 h-18 rounded-full">
+            <img :src="avatarPreview" alt="avatar" class="w-18 h-18 rounded-full" />
             <div class="space-y-2">
               <UButton @click="triggerUpload">选择头像</UButton>
               <!-- 被隐藏的文件输入框 -->
-              <UInput class="hidden" type="file" ref="fileInputRef" @change="uploadFile"/>
-<!--              <v-file-input ref="fileInputRef" class="d-none" @change="uploadFile"></v-file-input>-->
-              <p class="text-sm text-slate-500 dark:text-slate-400">支持 png/jpg/webp，建议小于2MB</p>
+              <UInput class="hidden" type="file" ref="fileInputRef" @change="uploadFile" />
+              <!--              <v-file-input ref="fileInputRef" class="d-none" @change="uploadFile"></v-file-input>-->
+              <p class="text-sm text-slate-500 dark:text-slate-400">
+                支持 png/jpg/webp，建议小于2MB
+              </p>
             </div>
           </div>
         </div>
@@ -57,14 +59,13 @@ const userStore = useUserStore()
         <div class="p-4 border dark:border-slate-600 border-slate-200 shadow">
           <p class="text-lg">账号</p>
           <div class="my-4"></div>
-          <div class=" space-y-4">
+          <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="text-slate-600 dark:text-slate-400">登录状态</span>
               <UBadge size="lg" color="success" variant="outline">已登录</UBadge>
             </div>
 
             <div class="flex items-center justify-between">
-
               <span class="text-slate-600 dark:text-slate-400">退出登录</span>
               <UPopover>
                 <UButton label="退出" color="error" variant="subtle" />
@@ -91,8 +92,15 @@ const userStore = useUserStore()
           <form.Field name="name">
             <template v-slot="{ field }">
               <div class="grid grid-cols-[1fr_4fr] gap-x-4">
-                <div class="required-label text-sm text-slate-600 dark:text-slate-400 text-right">昵称</div>
-                <UInput size="xl" :value="field.state.value" @update:modelValue="field.handleChange as any" placeholder="请输入用户名" />
+                <div class="required-label text-sm text-slate-600 dark:text-slate-400 text-right">
+                  昵称
+                </div>
+                <UInput
+                  size="xl"
+                  :value="field.state.value"
+                  @update:modelValue="field.handleChange as any"
+                  placeholder="请输入用户名"
+                />
               </div>
             </template>
           </form.Field>
@@ -101,31 +109,50 @@ const userStore = useUserStore()
             <template v-slot="{ field }">
               <div class="grid grid-cols-[1fr_4fr] gap-x-4">
                 <div class="text-sm text-slate-600 dark:text-slate-400 text-right">邮箱</div>
-                <UInput size="xl" :value="field.state.value" @update:modelValue="field.handleChange as any" placeholder="请输入邮箱" />
+                <UInput
+                  size="xl"
+                  :value="field.state.value"
+                  @update:modelValue="field.handleChange as any"
+                  placeholder="请输入邮箱"
+                />
               </div>
             </template>
           </form.Field>
           <div class="grid grid-cols-[1fr_4fr] gap-x-4">
-            <div class="required-label text-sm text-slate-600 dark:text-slate-400 text-right">定时任务</div>
+            <div class="required-label text-sm text-slate-600 dark:text-slate-400 text-right">
+              定时任务
+            </div>
             <USwitch size="xl" v-model="isTimingTaskSwitch" />
-<!--            <v-switch hide-details color="primary" v-model="isTimingTaskSwitch" density="compact" inset></v-switch>-->
+            <!--            <v-switch hide-details color="primary" v-model="isTimingTaskSwitch" density="compact" inset></v-switch>-->
           </div>
 
           <div class="grid grid-cols-[1fr_4fr] gap-x-4">
-            <div class="required-label text-sm text-slate-600 dark:text-slate-400 text-right">定时任务时间</div>
-            <UInputTime size="xl" v-model="timingTaskTime" :hour-cycle="24" :disabled="!isTimingTaskSwitch"/>
-<!--            <v-text-field hide-details density="compact" variant="outlined" :value="timingTaskTime"-->
-<!--              placeholder="请输入定时任务时间" :disabled="!isTimingTaskSwitch" readonly>-->
-<!--              <v-menu v-model="timingTaskTimeShow" :close-on-content-click="false" activator="parent" min-width="0">-->
-<!--                <v-time-picker v-model="timingTaskTime"></v-time-picker>-->
-<!--              </v-menu>-->
-<!--            </v-text-field>-->
+            <div class="required-label text-sm text-slate-600 dark:text-slate-400 text-right">
+              定时任务时间
+            </div>
+            <UInputTime
+              size="xl"
+              v-model="timingTaskTime"
+              :hour-cycle="24"
+              :disabled="!isTimingTaskSwitch"
+            />
+            <!--            <v-text-field hide-details density="compact" variant="outlined" :value="timingTaskTime"-->
+            <!--              placeholder="请输入定时任务时间" :disabled="!isTimingTaskSwitch" readonly>-->
+            <!--              <v-menu v-model="timingTaskTimeShow" :close-on-content-click="false" activator="parent" min-width="0">-->
+            <!--                <v-time-picker v-model="timingTaskTime"></v-time-picker>-->
+            <!--              </v-menu>-->
+            <!--            </v-text-field>-->
           </div>
           <form.Field name="address">
             <template v-slot="{ field }">
               <div class="grid grid-cols-[1fr_4fr] gap-x-4">
                 <div class="text-sm text-slate-600 dark:text-slate-400 text-right">地址</div>
-                <UInput size="xl" :value="field.state.value" @update:modelValue="field.handleChange as any" placeholder="请输入地址" />
+                <UInput
+                  size="xl"
+                  :value="field.state.value"
+                  @update:modelValue="field.handleChange as any"
+                  placeholder="请输入地址"
+                />
               </div>
             </template>
           </form.Field>
@@ -134,7 +161,12 @@ const userStore = useUserStore()
             <template v-slot="{ field }">
               <div class="grid grid-cols-[1fr_4fr] gap-x-4">
                 <div class="text-sm text-slate-600 dark:text-slate-400 text-right">签名</div>
-                <UInput size="xl" :value="field.state.value" @update:modelValue="field.handleChange as any" placeholder="写点什么介绍一下自己" />
+                <UInput
+                  size="xl"
+                  :value="field.state.value"
+                  @update:modelValue="field.handleChange as any"
+                  placeholder="写点什么介绍一下自己"
+                />
               </div>
             </template>
           </form.Field>

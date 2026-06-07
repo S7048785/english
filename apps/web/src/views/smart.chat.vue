@@ -1,13 +1,9 @@
 <script setup lang="ts">
 definePage({
-  meta: { requiresAuth: true }
-})
+  meta: { requiresAuth: true },
+});
 </script>
 
-<template>
-  addd
-</template>
+<template>addd</template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

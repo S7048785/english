@@ -5,7 +5,7 @@
 pnpm monorepo 英语学习应用。三个工作区根目录：`apps/*`、`server`、`packages/*`。
 
 **前端**: `apps/web` — Vue 3 + Vite + Tailwind CSS + Nuxt UI + Pinia  
-**后端 (NestJS)**: `server/` — NestJS 单仓库含两个应用 + 共享库 
+**后端 (NestJS)**: `server/` — NestJS 单仓库含两个应用 + 共享库
 **共享包**: `packages/common` (`@en/common`)、`packages/config` (`@en/config`)
 
 ## 命令
@@ -87,3 +87,4 @@ pnpm run build       # nest build
 - 修改代码前，先说明计划。
 - 不要主动引入新依赖，除非明确说明原因。
 - 不要重构无关文件。
+- 尽量使用注释解释代码，特别是复杂逻辑。
