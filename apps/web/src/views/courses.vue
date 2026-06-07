@@ -173,12 +173,9 @@ onMounted(() => {
                 <UButton
                     type="button"
                     block
-                    color="neutral"
-                    variant="soft"
-                    class="mt-4 py-2.5 rounded-xl text-sm font-medium cursor-pointer"
-                    disabled
+                    class="mt-4 py-2.5 rounded-xl text-sm font-medium text-indigo-600 border transition-colors cursor-pointer"
                 >
-                  已购买
+                  开始学习
                 </UButton>
               </div>
             </article>

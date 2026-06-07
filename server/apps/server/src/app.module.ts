@@ -10,9 +10,10 @@ import { ZodValidationPipe } from "nestjs-zod";
 import { AuthModule } from "./auth/auth.module";
 import { CourseModule } from "./course/course.module";
 import { PayModule } from "./pay/pay.module";
+import { LearnModule } from './learn/learn.module';
 
 @Module({
-  imports: [ScheduleModule.forRoot(), UserModule, SharedModule, WorkBookModule, AuthModule, CourseModule, PayModule],
+  imports: [ScheduleModule.forRoot(), UserModule, SharedModule, WorkBookModule, AuthModule, CourseModule, PayModule, LearnModule],
   controllers: [AppController],
   providers: [
     AppService,

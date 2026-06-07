@@ -13,6 +13,12 @@
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
     },
+    "motion-v-skilld": {
+      "source": "harlan-zw/vue-ecosystem-skills",
+      "sourceType": "github",
+      "skillPath": "skills/motion-v-skilld/SKILL.md",
+      "computedHash": "c61cbe95700b767a3e60e01b6585828973541efc6d026f5fb699feb0b5deea0f"
+    },
     "nuxt-ui": {
       "source": "nuxt/ui",
       "sourceType": "github",

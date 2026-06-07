@@ -37,6 +37,17 @@ export class PayController {
   }
 
   /**
+   * 获取当前用户已购买的课程列表
+   * @param req 请求对象，包含用户信息
+   * @returns 已购买的课程列表
+   */
+  @UseGuards(AuthGuard)
+  @Get('purchased-courses')
+  async getPurchasedCourses(@Req() req: Request) {
+    return this.payService.getPurchasedCourses(req.user.userId);
+  }
+
+  /**
    * 支付宝回调通知
    * 接收支付宝异步通知，处理支付结果
    * @param req 请求对象，包含支付宝回调参数

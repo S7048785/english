@@ -6,15 +6,6 @@ export const getCourseList = (): Result<Course[]> => {
   return serverInstance.get("/course/list");
 };
 
-export const getPurchasedCourseList = async (): Result<Course[]> => {
-  // TODO: 替换为真实 API
-  return {
-    data: [],
-    timestamp: new Date().toISOString(),
-    path: "/course/purchased",
-    message: "success",
-    code: 200,
-    success: true,
-  };
-  // return serverInstance.get('/course/purchased')
+export const getPurchasedCourseList = (): Result<Course[]> => {
+  return serverInstance.get("/pay/purchased-courses");
 };

@@ -72,7 +72,7 @@ export class PayService {
       // 生成订单号
       const outTradeNo = this.createTradNo();
       // 创建支付记录
-      const order = await this.prisma.paymentRecord.create({
+      const order = await tx.paymentRecord.create({
         data: {
           userId,
           outTradeNo: outTradeNo,
@@ -129,6 +129,31 @@ export class PayService {
   }
 
   /**
+   * 获取用户已购买的课程列表
+   * @param userId 用户ID
+   * @returns 已购买的课程列表（精简字段）
+   */
+  async getPurchasedCourses(userId: string) {
+    const courseRecords = await this.prisma.courseRecord.findMany({
+      where: {
+        userId,
+        isPurchased: true,
+      },
+      include: {
+        course: true,
+      },
+    });
+    return courseRecords.map((record) => ({
+      id: record.course.id,
+      name: record.course.name,
+      description: record.course.description,
+      teacher: record.course.teacher,
+      url: record.course.url,
+      price: Number(record.course.price).toString(),
+    }));
+  }
+
+  /**
    * 处理支付宝回调通知
    * @param userId 用户ID（从回调的body字段获取）
    * @param courseId 课程id
@@ -150,7 +175,7 @@ export class PayService {
     if (tradeStatus === TradeStatus.TRADE_SUCCESS) {
       await this.prisma.$transaction(async (tx) => {
         // 更新支付记录状态
-        const updateResult = await this.prisma.paymentRecord.update({
+        const updateResult = await tx.paymentRecord.update({
           where: {
             outTradeNo,
           },
@@ -162,7 +187,7 @@ export class PayService {
           },
         });
         // 创建课程购买记录
-        await this.prisma.courseRecord.create({
+        await tx.courseRecord.create({
           data: {
             userId,
             courseId,
