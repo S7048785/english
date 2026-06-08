@@ -20,17 +20,11 @@ pnpm web
 # NestJS 后端（监听模式）
 pnpm server
 
-# Elysia 后端（Bun 运行时）
-pnpm elysia
-
 # AI 聊天服务（NestJS）
 pnpm ai
 
 # 所有服务并行运行
 pnpm all
-
-# 前端 + NestJS 仅
-pnpm two
 
 # 生产环境构建前端
 pnpm run build
@@ -68,7 +62,6 @@ pnpm run build       # nest build
 
 ## 关键架构说明
 
-- 两个独立的后端：NestJS（Node.js）和 Elysia（Bun）。NestJS不再继续
 - `pnpm-workspace.yaml` 有 `allowBuilds` 条目需要明确设置为 true/false
 - 前端自动导入：`unplugin-auto-import` + `unplugin-vue-components` 生成 `auto-imports.d.ts` 和 `components.d.ts`
 - 前端使用文件路由（`vue-router/auto-routes`）
