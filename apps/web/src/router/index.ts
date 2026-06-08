@@ -7,6 +7,13 @@ export const router = createRouter({
   routes,
 });
 
+// 添加 404 路由（复用 [...slug].vue 组件）
+router.addRoute({
+  path: "/404",
+  name: "not-found",
+  component: () => import("@/views/[...slug].vue"),
+});
+
 // 全局前置守卫
 router.beforeEach((to, from) => {
   const userStore = useUserStore();
