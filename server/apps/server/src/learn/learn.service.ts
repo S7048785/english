@@ -23,7 +23,7 @@ export class LearnService {
       // 更新用户的单词数量
       return tx.user.update({
         where: { id: userId },
-        data: { wordCount: { increment: count } },
+        data: { wordNumber: { increment: count } },
       });
     });
     // 返回用户总的单词数量

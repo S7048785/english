@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import DefaultLayout from "@/components/layout/index.vue";
+import DefaultDefaultLayout from "@/components/layout/DefaultLayout.vue";
 import GlobalSearch from "@/components/GlobalSearch.vue";
-import LoginDialog from "@/components/login/index.vue";
+import LoginDialogDialog from "@/components/login/LoginDialog.vue";
 import "vue-sonner/style.css";
-import { Toaster } from "vue-sonner";
-import { getUserInfo as getUserInfoApi } from "@/api/server/user.ts";
-import { onMounted } from "vue";
-import { useUserStore } from "@/stores/user.ts";
+import {Toaster} from "vue-sonner";
+import {getUserInfo as getUserInfoApi} from "@/api/server/user.ts";
+import {onMounted} from "vue";
+import {useUserStore} from "@/stores/user.ts";
 
 const userStore = useUserStore();
 
 const getUserInfo = async () => {
   try {
-    const { data } = await getUserInfoApi();
+    const {data} = await getUserInfoApi();
     userStore.setUser(data);
   } catch (error) {
     console.error("获取用户信息失败", error);
@@ -27,10 +27,10 @@ onMounted(() => {
 <template>
   <UApp>
     <div class="app">
-      <DefaultLayout />
-      <GlobalSearch />
-      <LoginDialog />
-      <Toaster />
+      <DefaultDefaultLayout/>
+      <GlobalSearch/>
+      <LoginDialogDialog/>
+      <Toaster/>
     </div>
   </UApp>
   <!-- <v-app>

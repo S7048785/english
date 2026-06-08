@@ -1,4 +1,4 @@
-import { z } from "zod";
+import {z} from "zod";
 
 export type Word = {
 	id: string; // 单词ID
@@ -48,7 +48,7 @@ export const WordQuerySchema = z.object({
 	cet4: coerceBoolean,
 	ky: coerceBoolean,
 });
-
+export type WordQueryDto = z.infer<typeof WordQuerySchema>;
 export type WordList = {
 	list: Word[];
 	total: number;

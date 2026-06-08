@@ -51,11 +51,18 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/courses': RouteRecordInfo<
-      '/courses',
+    '/courses/': RouteRecordInfo<
+      '/courses/',
       '/courses',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    'learn': RouteRecordInfo<
+      'learn',
+      '/courses/learn/:courseId',
+      { courseId: ParamValue<true> },
+      { courseId: ParamValue<false> },
       | never
     >,
     '/setting': RouteRecordInfo<
@@ -110,9 +117,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/views/courses.vue': {
+    'src/views/courses/index.vue': {
       routes:
-        | '/courses'
+        | '/courses/'
+      views:
+        | never
+    }
+    'src/views/courses/learn/[courseId].vue': {
+      routes:
+        | 'learn'
       views:
         | never
     }

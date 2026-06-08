@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import LoginForm from "@/components/login/LoginForm.vue";
 import RegisterForm from "@/components/login/RegisterForm.vue";
-import { ref } from "vue";
-import { useLoginModalStore } from "@/stores/user.ts";
-import type { LoginType } from "@/components/login/type.ts";
+import {ref} from "vue";
+import {useLoginModalStore} from "@/stores/user.ts";
+import type {LoginType} from "@/components/login/type.ts";
 
 defineOptions({
-  name: "LoginDialog",
+  name: "LoginDialogDialog",
 });
 const loginModalStore = useLoginModalStore();
 
@@ -27,8 +27,8 @@ const toggleLoginModel = () => {
         <!-- 右侧登录表单区域 -->
         <div class="flex items-center">
           <div class="w-full">
-            <LoginForm v-if="loginModel === 'LOGIN'" @toggle="toggleLoginModel" />
-            <RegisterForm v-if="loginModel === 'REGISTER'" @toggle="toggleLoginModel" />
+            <LoginForm v-if="loginModel === 'LOGIN'" @toggle="toggleLoginModel"/>
+            <RegisterForm v-if="loginModel === 'REGISTER'" @toggle="toggleLoginModel"/>
           </div>
         </div>
       </div>

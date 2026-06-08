@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref, onMounted} from "vue";
 import type {CourseList, Course} from "@en/common/course";
-import {AVATAR_UPLOAD_URL as uploadUrl} from "@/api/index.ts";
+import {AVATAR_UPLOAD_URL as uploadUrl} from "@/api";
 import {getCourseList, getPurchasedCourseList} from "@/api/server/course.ts";
 import {useUserStore, useTokenStore, useLoginModalStore} from "@/stores/user.ts";
 import {usePayment} from "@/composables/business";
@@ -133,6 +133,7 @@ onMounted(() => {
                 >
                   购买课程
                 </UButton>
+
               </div>
             </article>
           </div>
@@ -170,13 +171,19 @@ onMounted(() => {
                   <span class="text-xs text-zinc-400 truncate">讲师 {{ item.teacher }}</span>
                   <span class="text-lg font-bold text-green-600 shrink-0">¥{{ item.price }}</span>
                 </div>
-                <UButton
-                    type="button"
-                    block
-                    class="mt-4 py-2.5 rounded-xl text-sm font-medium text-indigo-600 border transition-colors cursor-pointer"
-                >
-                  开始学习
-                </UButton>
+                <RouterLink :to="{
+                  name: 'learn',
+                  params: {courseId: item.id},
+                  query: {title: item.name},
+                }">
+                  <UButton
+                      type="button"
+                      block
+                      class="mt-4 py-2.5 rounded-xl text-sm font-medium text-indigo-600 border transition-colors cursor-pointer"
+                  >
+                    开始学习
+                  </UButton>
+                </RouterLink>
               </div>
             </article>
           </div>
