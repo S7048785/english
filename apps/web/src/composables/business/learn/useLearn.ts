@@ -12,6 +12,7 @@ export const useLearn = () => {
   const isBlur = ref(true); // 默认模糊开启
   const masteredIds = ref<string[]>([]);
   const showGroupCompleteModal = ref(false);
+  const error = ref<{code: number; message: string} | null>(null);
 
   // Store
   const userStore = useUserStore();
@@ -30,11 +31,17 @@ export const useLearn = () => {
   // 获取单词列表
   const fetchWords = async (courseId: string) => {
     isLoading.value = true;
+    error.value = null;
     try {
       const res = await getLearnWordList(courseId);
       words.value = res.data;
       currentIndex.value = 0;
       masteredIds.value = [];
+    } catch (e: any) {
+      error.value = {
+        code: e.response?.status || 500,
+        message: e.response?.data?.message || "加载失败",
+      };
     } finally {
       isLoading.value = false;
     }
@@ -91,6 +98,7 @@ export const useLearn = () => {
     isLoading,
     isBlur,
     showGroupCompleteModal,
+    error,
     canGoNext,
     canGoPrev,
     isAllCompleted,

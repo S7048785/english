@@ -22,6 +22,7 @@ const {
   isLoading,
   isBlur,
   showGroupCompleteModal,
+  error,
   canGoNext,
   canGoPrev,
   fetchWords,
@@ -128,6 +129,16 @@ onMounted(() => {
     <!-- 加载状态 -->
     <div v-if="isLoading" class="flex-1 flex items-center justify-center">
       <div class="text-zinc-400">加载中...</div>
+    </div>
+
+    <!-- 错误状态 - 复用 404 页面布局 -->
+    <div
+        v-else-if="error"
+        class="min-h-[80vh] flex flex-col items-center justify-center px-4"
+    >
+      <h1 class="text-8xl font-bold text-zinc-200 dark:text-zinc-700 mb-4">404</h1>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-8">页面不存在</p>
+      <UButton label="返回课程列表" to="/courses"/>
     </div>
 
     <!-- 学习内容 -->
