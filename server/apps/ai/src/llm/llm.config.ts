@@ -4,8 +4,8 @@ import { PostgresSaver } from '@langchain/langgraph-checkpoint-postgres';
 
 export const createModel = () => {
   return new ChatOpenAI({
-    model: 'deepseek-v4-flash',
-    apiKey: process.env.AI_MODLE_API_KEY,
+    model: process.env.AI_MODEL,
+    apiKey: process.env.AI_MODEL_API_KEY,
     configuration: {
       baseURL: process.env.AI_BASE_URL,
     },
@@ -14,7 +14,7 @@ export const createModel = () => {
     streaming: true,
     modelKwargs: {
       // 关闭深度思考
-      enable_thinking: false
+      enable_thinking: false,
     },
   });
 };
