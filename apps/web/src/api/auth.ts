@@ -50,53 +50,42 @@ export const InertRefresh = async (error: any) => {
     return Promise.reject(error);
   }
 
-  // 如果正在刷新token,则将请求存储到队列中,等待token刷新后重新请求
-  // 把当前过期的请求“挂起（暂停）”，放进等待队列，等拿到新 Token 后再“复活”并重新发送。
-  if (isRefreshing) {
-    return new Promise((resolve, reject) => {
-      // 改变存储结构，把 reject 也存下来
-      requestQueue.push({
-        resolve: (newAccessToken: string) => {
-          originalRequest.headers.set("Authorization", `Bearer ${newAccessToken}`);
-          resolve(serverInstance(originalRequest));
-        },
-        reject: (err: any) => {
-          reject(err);
-        },
-      });
+  // 所有请求（包括触发刷新的那个）都入队等待
+  return new Promise((resolve, reject) => {
+    requestQueue.push({
+      resolve: (newAccessToken: string) => {
+        originalRequest.headers.set("Authorization", `Bearer ${newAccessToken}`);
+        resolve(serverInstance(originalRequest));
+      },
+      reject: (err: any) => {
+        reject(err);
+      },
     });
-  }
-  // 开始刷新 token
-  isRefreshing = true;
-  try {
-    const res = await refreshTokenApi();
-    useTokenStore().setAccessToken(res.data);
-    // 【优化】成功后，先消费并清空队列，再重置刷新状态
-    const currentQueue = [...requestQueue];
-    requestQueue = [];
-    isRefreshing = false; // 及时重置，允许后续正常请求进来
 
-    // 成功刷新token，通知队列中挂起的请求重试
-    currentQueue.forEach((item) => item.resolve(res.data));
+    // 只有第一个请求负责触发刷新
+    if (!isRefreshing) {
+      isRefreshing = true;
+      refreshTokenApi()
+        .then((res) => {
+          useTokenStore().setAccessToken(res.data);
+          const currentQueue = [...requestQueue];
+          requestQueue = [];
+          isRefreshing = false; // 及时重置，允许后续正常请求进来
 
-    // 重试第一个失败的请求
-    originalRequest.headers.set("Authorization", `Bearer ${res.data}`);
-    return serverInstance(originalRequest);
-  } catch (e: any) {
-    if (e.response.status === 401) {
-      toast.error(e.response.data.message);
-    } else {
-      toast.error(e.message);
+          // 成功刷新token，通知队列中挂起的请求重试
+          currentQueue.forEach((item) => item.resolve(res.data));
+        })
+        .catch((e) => {
+          // 【核心修复】token 刷新失败，必须通知队列里所有人一起失败，避免页面挂起
+          const currentQueue = [...requestQueue];
+          requestQueue = [];
+          isRefreshing = false;
+          currentQueue.forEach((item) => item.reject(e));
+          // token刷新失败，重新登录
+          useUserStore().logout();
+          // await alert('用户未登录')
+          router.replace("/");
+        });
     }
-    // 【核心修复】token 刷新失败，必须通知队列里所有人一起失败，避免页面挂起
-    const currentQueue = [...requestQueue];
-    requestQueue = [];
-    isRefreshing = false;
-    currentQueue.forEach((item) => item.reject(e));
-    // token刷新失败，重新登录
-    useUserStore().logout();
-    // await alert('用户未登录')
-    await router.replace("/");
-    return Promise.reject(e || error);
-  }
+  });
 };
