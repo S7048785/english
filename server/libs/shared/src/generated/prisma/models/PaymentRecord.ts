@@ -272,8 +272,8 @@ export type PaymentRecordWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   course_id?: Prisma.StringFilter<"PaymentRecord"> | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   CourseRecord?: Prisma.CourseRecordListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type PaymentRecordOrderByWithRelationInput = {
@@ -289,8 +289,8 @@ export type PaymentRecordOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   course_id?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   CourseRecord?: Prisma.CourseRecordOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -309,8 +309,8 @@ export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   course_id?: Prisma.StringFilter<"PaymentRecord"> | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   CourseRecord?: Prisma.CourseRecordListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "outTradeNo">
 
 export type PaymentRecordOrderByWithAggregationInput = {
@@ -363,8 +363,8 @@ export type PaymentRecordCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   course_id: string
-  user: Prisma.UserCreateNestedOneWithoutPaymentRecordsInput
   CourseRecord?: Prisma.CourseRecordCreateNestedManyWithoutPaymentRecordInput
+  user: Prisma.UserCreateNestedOneWithoutPaymentRecordsInput
 }
 
 export type PaymentRecordUncheckedCreateInput = {
@@ -395,8 +395,8 @@ export type PaymentRecordUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course_id?: Prisma.StringFieldUpdateOperationsInput | string
-  user?: Prisma.UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
   CourseRecord?: Prisma.CourseRecordUpdateManyWithoutPaymentRecordNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
 }
 
 export type PaymentRecordUncheckedUpdateInput = {
@@ -849,8 +849,8 @@ export type PaymentRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   createdAt?: boolean
   updatedAt?: boolean
   course_id?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   CourseRecord?: boolean | Prisma.PaymentRecord$CourseRecordArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentRecordCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentRecord"]>
 
@@ -903,8 +903,8 @@ export type PaymentRecordSelectScalar = {
 
 export type PaymentRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "tradeNo" | "outTradeNo" | "amount" | "subject" | "body" | "tradeStatus" | "sendPayTime" | "createdAt" | "updatedAt" | "course_id", ExtArgs["result"]["paymentRecord"]>
 export type PaymentRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   CourseRecord?: boolean | Prisma.PaymentRecord$CourseRecordArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentRecordCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PaymentRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -917,8 +917,8 @@ export type PaymentRecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $PaymentRecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PaymentRecord"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     CourseRecord: Prisma.$CourseRecordPayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1327,8 +1327,8 @@ readonly fields: PaymentRecordFieldRefs;
  */
 export interface Prisma__PaymentRecordClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   CourseRecord<T extends Prisma.PaymentRecord$CourseRecordArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentRecord$CourseRecordArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

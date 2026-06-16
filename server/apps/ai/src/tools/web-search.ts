@@ -70,47 +70,4 @@ export const bochaWebSearchTool = (configService: ConfigService) => {
       }),
     },
   );
-}
-const a = async () => {
-  // 初始化 OpenAI 语言模型
-  const llm = new ChatOpenAI({
-    temperature: 1.3,
-    model: 'deepseek-v4-flash',
-    apiKey: "sk-284e840688db4cd1bd724e859c38d62e",
-    configuration: {
-      baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1",
-    },
-    maxTokens: 4396,
-    streaming: true,
-    modelKwargs: {
-      // 关闭深度思考
-      enable_thinking: false
-    },
-  });
-
-  // 创建代理
-  const agent = createAgent({
-    model: llm,
-    tools: [bochaWebSearchTool(new ConfigService())],
-    systemPrompt: 'You are a helpful assistant.',
-  });
-
-  // 使用代理进行查询
-  const userQuestion = '请告诉我阿里巴巴2025年ESG报告中的亮点';
-  const result = await agent.invoke({
-    messages: [
-      {
-        role: 'user',
-        content: userQuestion,
-      },
-    ],
-  });
-
-  /**
-   * HumanMessage 用户消息 [props]
-   * AIMessageChunk 代理回复 [我需要先搜索阿里巴巴2025年ESG报告的相关信息。]
-   * ToolMessage 工具调用 [引用...文章名称...文章内容...链接... * 10]
-   * AIMessageChunk 代理回复 [根据搜索到的消息....]
-   */
-  console.log(result.messages[3].content);
 };

@@ -104,6 +104,7 @@ onMounted(() => {
             >
               <div class="relative aspect-4/3 bg-zinc-100 overflow-hidden">
                 <img
+                    loading="lazy"
                     :src="imageSrc(item.url)"
                     :alt="item.name"
                     class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -152,6 +153,7 @@ onMounted(() => {
                 <img
                     :src="imageSrc(item.url)"
                     :alt="item.name"
+                    loading="lazy"
                     class="absolute inset-0 w-full h-full object-cover"
                 />
                 <div
@@ -196,6 +198,7 @@ onMounted(() => {
             <img
                 :src="imageSrc(selectedCourse.url)"
                 :alt="selectedCourse.name"
+                loading="lazy"
                 class="w-full h-48 object-cover rounded-lg"
             />
             <p class="text-zinc-500 text-sm leading-relaxed">{{ selectedCourse.description }}</p>

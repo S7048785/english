@@ -1,9 +1,20 @@
-import { Controller, Get, Post, Delete, Body, Res, Req, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Res,
+  Req,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ChatService } from './chat.service';
 import type { ChatRoleType } from '@en/common';
 import type { Request, Response } from 'express';
 import { ChatDto } from './dto';
 import { AIMessageChunk } from 'langchain';
+import { AuthGuard } from '@libs/shared/auth/auth.guard';
 
 /**
  * AIMessageChunk {
@@ -25,28 +36,36 @@ import { AIMessageChunk } from 'langchain';
 export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Post()
-  async create(@Body() createChatDto: ChatDto, @Res() res: Response) {
-
+  async create(
+    @Body() createChatDto: ChatDto,
+    @Res() res: Response,
+    @Req() req: Request,
+  ) {
     // SSE 流式输出
     res.setHeader('Content-Type', 'text/event-stream');
     // 不缓存
     res.setHeader('Cache-Control', 'no-cache');
     // 保持连接
     res.setHeader('Connection', 'keep-alive');
-    const stream = await this.chatService.create(createChatDto);
+    const stream = await this.chatService.create(
+      createChatDto,
+      req.user.userId,
+    );
     for await (const chunk of stream) {
-      const [msg] = chunk
+      const [msg] = chunk;
       // 流式循环时区分 ai消息类型
       // 只有 AI 模型输出的消息才会推送到前端，ToolMessageChunk（搜索工具的原始结果）会被跳过
       if (msg instanceof AIMessageChunk) {
-        res.write(`data: ${JSON.stringify({
-          id: msg.id,
-          content: msg.content,
-          reasoning: msg.additional_kwargs.reasoning_content,
-          role: 'ai',
-        })}\n\n`);
+        res.write(
+          `data: ${JSON.stringify({
+            id: msg.id,
+            content: msg.content,
+            reasoning: msg.additional_kwargs.reasoning_content,
+            role: 'ai',
+          })}\n\n`,
+        );
       }
     }
     // 4. 当循环结束，说明大模型已经全部输出完毕，发送结束标记
@@ -56,15 +75,21 @@ export class ChatController {
 
   // @UseGuards(AuthGuard)
   @Get('list')
-  async findAll(@Req() req: Request, @Query('role') role: ChatRoleType, @Query('userId') userId: string) {
+  async findAll(
+    @Req() req: Request,
+    @Query('role') role: ChatRoleType,
+    @Query('userId') userId: string,
+  ) {
     return await this.chatService.findAll(userId, role);
   }
 
   // @UseGuards(AuthGuard)
   @Delete()
-  async clearSession(@Query('userId') userId: string, @Query('role') role: ChatRoleType) {
+  async clearSession(
+    @Query('userId') userId: string,
+    @Query('role') role: ChatRoleType,
+  ) {
     await this.chatService.clearSession(userId, role);
     return { message: '会话已清除' };
   }
-
 }

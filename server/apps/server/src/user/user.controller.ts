@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpException,
   Post,
   Put,
   Req,
@@ -54,6 +55,7 @@ export class UserController {
     });
   }
 
+  @UseGuards(AuthGuard)
   @Post('logout')
   logout(@Req() request: Request, @Res({ passthrough: true }) res: Response) {
     this.removeToken(res);
@@ -99,9 +101,13 @@ export class UserController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @UseInterceptors(FileInterceptor('file')) // 限制前端的key必须是file
   @Post('upload-avatar')
   async uploadAvatar(@UploadedFile() file: Express.Multer.File) {
+    if (!['image/jpeg', 'image/png'].includes(file.mimetype)) {
+      throw new HttpException('Invalid file type', 400);
+    }
     return await this.userService.uploadAvatar(file);
   }
 
@@ -132,6 +138,7 @@ export class UserController {
       path: '/', // cookie 生效路径
     });
   }
+
   removeToken(res: Response) {
     res.clearCookie('refresh_token', {
       httpOnly: true,

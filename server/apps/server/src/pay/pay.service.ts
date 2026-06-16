@@ -170,7 +170,8 @@ export class PayService {
     tradeNo: string,
     gmt_payment: string,
   ) {
-    console.log('支付回调参数:', userId, outTradeNo, tradeStatus, tradeNo);
+    // console.log('支付回调参数:', userId, outTradeNo, tradeStatus, tradeNo);
+
     // 只处理交易成功的情况
     if (tradeStatus === TradeStatus.TRADE_SUCCESS) {
       await this.prisma.$transaction(async (tx) => {
@@ -197,5 +198,9 @@ export class PayService {
         });
       });
     }
+  }
+
+  checkSign(data: any) {
+    return this.alipayService.checkSign(data);
   }
 }

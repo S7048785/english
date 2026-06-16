@@ -11,6 +11,9 @@ import {useUserStore} from "@/stores/user.ts";
 const userStore = useUserStore();
 
 const getUserInfo = async () => {
+  if (!userStore.user) {
+    return;
+  }
   try {
     const {data} = await getUserInfoApi();
     userStore.setUser(data);

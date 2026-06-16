@@ -23,7 +23,7 @@ model User {
   lastLoginAt     DateTime?
   bio             String?
   isTimingTask    Boolean          @default(false)
-  timingTaskTime  String           @default("00:00:00")
+  timingTaskTime  String           @default("00:00")
   courseRecords   CourseRecord[]
   paymentRecords  PaymentRecord[]
   wordBookRecords WordBookRecord[]
@@ -85,8 +85,8 @@ model PaymentRecord {
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   course_id    String
-  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   CourseRecord CourseRecord[]
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([tradeNo])
   @@index([course_id], map: "paymentrecord_course_id_index")

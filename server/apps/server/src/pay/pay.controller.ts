@@ -1,4 +1,13 @@
-import { Controller, Post, Get, Req, Query, UseGuards, All } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Req,
+  Query,
+  UseGuards,
+  All,
+  HttpException,
+} from '@nestjs/common';
 import { PayService } from './pay.service';
 import type { Request } from 'express';
 import { AuthGuard } from '@libs/shared/auth/auth.guard';
@@ -55,7 +64,10 @@ export class PayController {
   @All('notify')
   async notify(@Req() req: Request) {
     const params = req.body;
-    console.log('支付回调参数:', params);
+    if (!this.payService.checkSign(params)) {
+      throw new HttpException('签名验证失败', 400);
+    }
+    // console.log('支付回调参数:', params);
     const { userId, courseId } = JSON.parse(params.body);
     await this.payService.handleAlipayNotify(
       userId, // userId，用于识别用户

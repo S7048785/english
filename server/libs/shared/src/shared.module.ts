@@ -33,7 +33,7 @@ import { BullModule } from '@nestjs/bullmq';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('SECRET_KEY'), //秘钥
-        signOptions: { expiresIn: 10 }, //10秒过期 方便测试
+        signOptions: { expiresIn: 10 * 60 }, //10秒过期 方便测试
       }),
       inject: [ConfigService],
     }),
